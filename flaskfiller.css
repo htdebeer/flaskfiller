@@ -1,0 +1,288 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body > .container-fluid {
+  padding: 0;
+  margin:0;
+
+}
+
+header {
+  font-size: 16pt;
+}
+
+header nav a {
+  color: inherit;
+}
+
+h4.panel-title {
+  border-bottom: 1px solid;
+  border-color: #0275d8;
+  padding-bottom: 5px;
+}
+
+h4.panel-title a:hover, h4.panel-title a:focus {
+  text-decoration: none;
+}
+
+.tab-content {
+  padding: 15px;
+}
+
+#settings, #information, #help {
+  font-size: 14pt;
+}
+
+#world-height {
+  display: inline-block;
+  min-width: 5em;
+}
+
+form legend.col-form-legend {
+  font-size: 14pt;
+}
+
+figure {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+figcaption {
+  margin-left: 45px;
+}
+
+figcaption select {
+  text-align: left;
+}
+
+table {
+  margin-top: 30px;
+  margin-left: 4px;
+}
+
+svg {
+}
+
+svg g.line path:hover {
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th[data-list] ol.list {
+  visibility: collapse;
+  z-index: 100;
+  list-style: none;
+  font-weight: lighter;
+  padding-top: 0;
+  margin-top: 0;
+  margin-left: 1ex;
+}
+
+th[data-list]:hover ol.list  {
+  visibility: visible;
+}
+
+th[data-list] ol.list li:hover {
+  background: dimgray;
+  color: white;
+}
+
+
+td {
+  border: 1px solid gray;
+  text-align: right;
+  padding: 0.5ex;
+  font-size: inherit;
+}
+
+th {
+  border: 1px solid gray;
+  padding-left: 0.5ex;
+  padding-right: 0.5ex;
+}
+
+th.corner {
+  border: none;
+  background: none;
+}
+
+tr.main_head {
+  font-style: italic;
+}
+
+tr.main_head th {
+  background: gray;
+  color: white;
+}
+
+tr.sub_head {
+}
+
+td.color {
+}
+
+
+tfoot th select {
+  padding: 0.25ex;
+  margin: 0.25ex;
+  border: 1px solid white;
+  font-family: inherit;
+  font-size: inherit;
+  text-align: right;
+}
+
+input {
+  padding: 0;
+  padding-right: 1ex;
+  border: white 1px solid;
+  font-family: inherit;
+  font-size: inherit;
+  max-width: 4em;
+  text-align: right;
+}
+
+
+:invalid {
+  background-color: crimson;
+  color: white;
+}
+
+select {
+  padding-right: 1ex;
+}
+
+span.unit {
+  font-size: smaller;
+  padding-left: 1ex;
+  padding-right: 1ex;
+}
+
+input[type='range'] {
+  padding-top: 1ex;
+  margin-left: 10px;
+  max-height: 1px;
+}
+
+
+button[data-action='remove'] { 
+  background: crimson;
+  color: white;
+}
+
+button.left-separator {
+  margin-left: 10px;
+}
+
+button[data-toggled] {
+  background-color: gold;
+}
+
+:not(:disabled)[data-tooltip]::before {
+  content: attr(data-tooltip);
+  font-size: smaller;
+  z-index: 100;
+  padding-right: 1ex;
+  padding-left: 1ex;
+  background: white;
+  color: dimgray;
+  position: absolute;
+  visibility: hidden;
+  opacity:0;
+
+  transition-property: opacity;  
+  transition-duration: 0.25s;
+  transition-timing-function: ease-in;
+  transition-delay: 0.5s;
+}
+
+:not(:disabled)[data-tooltip]:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+#graph {
+}
+
+.axis {
+  font-size: 10pt;
+  font-family: inherit;
+}
+
+.axis path {
+  fill: none;
+  stroke: black;
+}
+
+.axis .tick {
+  fill: none;
+  stroke: black;
+}
+
+.grid path {
+  fill: none;
+}
+
+.grid .tick {
+  fill: none;
+  stroke: black;
+  stroke-opacity: 0.25;
+}
+
+circle.drag-handle:hover {
+  stroke-opacity: 1;
+  fill-opacity: 0.5;
+  cursor: move;
+}
+
+svg {
+  font-family: 'Gill Sans MS', 'Helvetica', sans-serif;
+}
+
+div.tooltip {
+  padding: 1ex;
+  background-color: yellow;
+  border-radius: 1ex;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+div.tooltip.disabled {
+  display: none;
+  pointer-events: none;
+}
+
+div.speed_tooltip {
+  padding: 1ex;
+  background-color: greenyellow;
+  border-radius: 1ex;
+  opacity: 0.7;
+}
+
+div.speed_tooltip.disabled {
+  display: none;
+}
+
+form.metadata {
+  padding: 1ex;
+}
+
+form.metadata label {
+  font-weight: bolder;
+  margin-right: 1ex;
+}
+
+form.metadata input {
+  padding-left: 1ex;
+  padding-right: 1ex;
+  border: dimgray 1px solid;
+  font-family: inherit;
+  font-size: inherit;
+  text-align: left;
+  max-width: 15em;
+}

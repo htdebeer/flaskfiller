@@ -1,0 +1,38 @@
+{
+  "name": "flaskfiller",
+  "version": "0.0.1",
+  "description": "Educational software to teach and learn about instantaneous speed in the context of filling glassware",
+  "main": " ",
+  "scripts": {
+    "build": "browserify -o flaskfiller.js src/ui.js",
+    "standalone-en": "./create_standalone.sh en",
+    "standalone-nl": "./create_standalone.sh nl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/htdebeer/flaskfiller.git"
+  },
+  "keywords": [
+    "primary",
+    "education",
+    "instantaneous",
+    "speed",
+    "calculus",
+    "mathematics",
+    "education",
+    "learning"
+  ],
+  "author": "Huub de Beer",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/htdebeer/flaskfiller/issues"
+  },
+  "homepage": "https://github.com/htdebeer/flaskfiller#readme",
+  "devDependencies": {
+    "bootstrap": "^4.0.0-alpha.5",
+    "browserify": "^13.1.0",
+    "d3": "^4.2.8",
+    "font-awesome": "^4.6.3",
+    "raphael": "^2.2.6"
+  }
+}

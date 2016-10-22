@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<!--
+Copyright 2016 Huub de Beer <Huub@heerdebeer.org>
+
+This file is part of FlaskFiller.
+
+FlaskFiller is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+FlaskFiller is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<html lang="nl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="keywords" content="wiskundeonderwijs, basisschool, differentiaalrekening, momentane snelheid, snelheid">
+    <title>Flessenvuller: Onderzoek snelheid bij het vullen van glazen</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="flaskfiller.css">
+  </head>
+  <body>
+    <!-- Flaskfiller menu -->
+    <header>
+      <nav class="navbar bg-primary navbar-full">
+        <ul class="nav nav-tabs navbar-nav" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" href="#filler" data-toggle="tab" role="tab">
+              <span class="icon fa fa-glass"></span>
+              <span class="hidden-sm-down">Flessenvuller</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#settings" data-toggle="tab" role="tab">
+              <span class="icon fa fa-wrench"></span>
+              <span class="hidden-sm-down">Instellingen</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#information" data-toggle="tab" role="tab">
+              <span class="icon fa fa-info"></span>
+              <span class="hidden-sm-down">Informatie</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#help" data-toggle="tab" role="tab">
+              <span class="icon fa fa-question"></span>
+              <span class="hidden-sm-down">Help</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="container-fluid">
+      <div class="tab-content">
+        <!-- 
+          The actual flaskfiller with four components:
+          - simulation, 
+          - graph,
+          - control + table, 
+          - and glass designer 
+        -->
+        <div class="tab-pane active" id="filler" role="tabpanel">
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <figure id="simulation"></figure>
+              <figure id="graph"></figure>  
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <table id="table"></table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-xs-12">
+              <figure class="col" id="designer"></figure>
+            </div>
+          </div>
+        </div>
+        <!-- 
+          Settings tab to configure the flaskfiller software 
+        -->
+        <div class="tab-pane" id="settings" role="tabpanel">
+          <div class="alert alert-info invisible" id="reload-message" role="alert">
+            Herlaad de pagina om de veranderingen door te voeren.
+          </div>
+          <div id="settings-accordion" role="tablist" aria-multiselectable="true">
+
+            <form id="configuration-form" name="configuration-form">
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="settings-general">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#settings-accordion"
+                      href="#collapse-settings-general" aria-expanded="true"
+                      aria-controls="collapse-settings-general">
+                      Algemeen
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse-settings-general" class="panel-collapse collapse in" role="tabpanel"
+                  aria-labelledby="settings-general">
+                  <fieldset class="form-group row">
+                    <legend class="col-form-legend col-sm-4">
+                      Componenten
+                    </legend>
+                    <div class="col-sm-8">
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="components" value="simulation" checked>
+                          Simulatie
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="components" value="graph" checked>
+                          Grafiek
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="components" value="table" checked>
+                          Tabel
+                        </label>
+                      </div>
+                      <div class="form-check disabled">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="components" value="control" checked disabled>
+                          Besturing
+                        </label>
+                      </div>
+                      <!--
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="components" value="designer">
+                          Glas ontwerper
+                        </label>
+                      </div>
+                      -->
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="settings-simulation">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" class="collapsed" data-parent="#settings-accordion"
+                      href="#collapse-settings-simulation" aria-expanded="true"
+                      aria-controls="collapse-settings-simulation">
+                      Simulatie
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse-settings-simulation" role="tabpanel"
+                  class="panel-collapse collapse"
+                  aria-labelledby="settings-simulation">
+
+                  <div class="form-group row">
+                    <label for="world-height" class="form-label col-sm-4">Hoogte wereld</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" type="number" value="18"
+                      name="world-height"
+                      id="world-height"> (cm)
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="settings-graph">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" class="collapsed" data-parent="#settings-accordion"
+                      href="#collapse-settings-graph" aria-expanded="true"
+                      aria-controls="collapse-settings-graph">
+                      Grafiek
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse-settings-graph" role="tabpanel"
+                  class="panel-collapse collapse"
+                  aria-labelledby="settings-graph">
+                  <div class="form-group row">
+                    <label for="horizontal-axis" class="form-label
+                      col-sm-4">Horizontale as</label>
+                    <div class="col-sm-8">
+                      <select class="custom-select" name="horizontal-axis"
+                        id="horizontal-axis">
+                        <option value="height">Hoogte</option>
+                        <option value="volume">Volume</option>
+                        <option value="time" selected>Tijd</option>
+                        <option value="speed">Stijgsnelheid</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="vertical-axis" class="form-label
+                      col-sm-4">Verticale as</label>
+                    <div class="col-sm-8">
+                      <select class="custom-select" name="vertical-axis"
+                        id="vertical-axis">
+                        <option value="height" selected>Hoogte</option>
+                        <option value="volume">Volume</option>
+                        <option value="time">Tijd</option>
+                        <option value="speed">Stijgsnelheid</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <fieldset class="form-group row">
+                    <legend class="col-form-legend col-sm-4">
+                      Grafiektypen
+                    </legend>
+                    <div class="col-sm-8">
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="graph-types" value="arrow">
+                          Pijlgrafiek
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="graph-types" value="bar">
+                          Staafjesgrafiek
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="graph-types" value="line" checked>
+                          Lijngrafiek
+                        </label>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset class="form-group row">
+                    <legend class="col-form-legend col-sm-4">
+                      Opties
+                    </legend>
+                    <div class="col-sm-8">
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="graph-options" value="coordinates" checked>
+                          Laat coordinaten zien
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="graph-options" value="speed">
+                          Laat snelheid zien
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="graph-options" value="tangent-line">
+                          Laat raaklijn zien
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="graph-options" value="step" checked>
+                          Laat stapgroottebesturing pijl- en staafgrafiek zien
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="graph-options" value="move-highball">
+                          Beweegbare grafiek van het uitrekbare
+                          longdrinkglaasje
+                        </label>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="settings-table">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" class="collapsed" data-parent="#settings-accordion"
+                      href="#collapse-settings-table" aria-expanded="true"
+                      aria-controls="collapse-settings-table">
+                      Tabel
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse-settings-table" role="tabpanel"
+                  class="panel-collapse collapse"
+                  aria-labelledby="settings-table">
+                  <fieldset class="form-group row">
+                    <legend class="col-form-legend col-sm-4">
+                      Grootheden
+                    </legend>
+                    <div class="col-sm-8">
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="table-quantities" value="height" checked>
+                          Hoogte
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="table-quantities" value="time" checked>
+                          Time
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="table-quantities" value="volume" checked>
+                          Volume
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="table-quantities" value="speed">
+                          Stijgsnelheid
+                        </label>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="settings-control">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" class="collapsed" data-parent="#settings-accordion"
+                      href="#collapse-settings-control" aria-expanded="true"
+                      aria-controls="collapse-settings-control">
+                      Besturing
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse-settings-control" role="tabpanel"
+                  class="panel-collapse collapse"
+                  aria-labelledby="settings-control">
+                  <fieldset class="form-group row">
+                    <legend class="col-form-legend col-sm-4">
+                      Toe te voegen glazen
+                    </legend>
+                    <div class="col-sm-8">
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="glasses" value="cocktail" checked>
+                          Cocktailglas
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="glasses" value="highball" checked>
+                          Longdrinkglas
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="glasses" value="extensible-highball" checked>
+                          Uitrekbaar longdrinkglas
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="glasses" value="wine" checked>
+                          Wijnglas
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="glasses" value="cognac" checked>
+                          Cognacglas
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="glasses" value="beer" checked>
+                          Bierglas
+                        </label>
+                      </div>
+                      <!-- Add these later
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="glasses" value="erlenmeyer" checked>
+                          Erlenmeyer
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox"
+                          name="glasses" value="round-bottom" checked>
+                          Rondbodemfles
+                        </label>
+                      </div>
+                      -->
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+
+              <!--
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="settings-designer">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" class="collapsed" data-parent="#settings-accordion"
+                      href="#collapse-settings-designer" aria-expanded="true"
+                      aria-designers="collapse-settings-designer">
+                      Glas ontwerper
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse-settings-designer" role="tabpanel"
+                  class="panel-collapse collapse"
+                  aria-labelledby="settings-designer">
+                </div>
+              </div>
+              -->
+            </form>
+          </div>
+        </div>
+        <!-- 
+          Information about the flaskfiller software and the research and
+          educational design projects it was developed in 
+        -->
+        <div class="tab-pane" id="information" role="tabpanel">
+          <h1 id="flessenvuller">Flessenvuller</h1>
+          <p>Flessenvuller is gemaakt als onderdeel van een <a href="https://heerdebeer.org/DR/">onderzoek naar het onderwijzen van momentane snelheid in groep 7 van de basisschool</a>. Tijdens dat onderzoek zijn een viertal onderwijsexperimenten uitgevoerd, steeds met een verbeterde versie van de Flessenvuller software. De versie die je nu ziet, is de laatste versie.</p>
+          <h2 id="software">Software</h2>
+          <p>De Flessenvuller software is zogenaamde <a href="https://www.gnu.org/philosophy/free-sw.en.html">vrije software</a> vrijgegeven onder de <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPL versie 3 softwarelicentie</a>. Dit houdt in dat je het mag gebruiken, aanpassen, en verspreiden zolang die aanpassingen ook onder deze licentie vallen.</p>
+          <p>Flessenvuller is gemaakt met behulp van de volgende stukken software en bibliotheken:</p>
+          <ul>
+            <li><a href="http://dmitrybaranovskiy.github.io/raphael/">Raphaël.js</a> voor de simulatie</li>
+            <li><a href="https://d3js.org/">d3</a> voor de grafiek</li>
+            <li><a href="https://v4-alpha.getbootstrap.com/">Bootstrap</a> en <a href="https://blog.jquery.com/">jQuery</a> voor het menu, tabs, en instellingenpagina</li>
+            <li><a href="http://fontawesome.io/">Font awesome</a> voor de iconen</li>
+            <li><a href="http://browserify.org/">Browserify</a> om alles aaneen te knopen</li>
+            <li>en <a href="http://pandoc.org/">pandoc</a> om de standalone versie te genereren</li>
+          </ul>
+        </div>
+        <!-- 
+          Help on using flaskfiller
+        -->
+        <div class="tab-pane" id="help" role="tabpanel">
+          <p>
+            Hoe Flessenvuller te gebruiken:
+          </p>
+        </div>
+      </div>
+    </main>
+    <script src="node_modules/jquery/dist/jquery.min.js"><!--</script>
+    <script>
+      // surpress Bootstrap warning about missing Tether: is not used in FlaskFiller anyway
+      window.Tether = function () {};
+    </script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/raphael/raphael.min.js"></script>
+    <script src="node_modules/d3/build/d3.min.js"></script>
+    <script src="flaskfiller.js" charset="utf-8"></script>
+  </body>
+</html>
