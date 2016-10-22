@@ -145,6 +145,14 @@ const longdrink_glass = function(canvas, model, SCALE, snap_values, boundaries_)
         }
     };
 
+    _glass.set_snap_value = function() {
+      snap_values[model.name] = _glass.x + _glass.width / 2;
+    };
+
+    _glass.get_snap_values = function() {
+      return Object.keys(snap_values).map(function (m) {return snap_values[m] - _glass.width / 2;});
+    };
+
     return _glass;
 };
 
