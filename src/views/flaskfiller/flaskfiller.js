@@ -1,11 +1,28 @@
+/*
+ * Copyright 2012, 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
+ *
+ * This file is part of FlaskFiller.
+ *
+ * FlaskFiller is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * FlaskFiller is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
+ */
+const view = require("../view");
+const dom = require("../../dom");
+const ruler = require("./ruler");
+const longdrink = require("./longdrink_glass");
+const various_glass = require("./glass");
 
-var view = require("../view"),
-    dom = require("../../dom"),
-    ruler = require("./ruler"),
-    longdrink = require("./longdrink_glass"),
-    various_glass = require("./glass");
-
-var flaskfiller = function(config) {
+const flaskfiller = function(config) {
     var _flaskfiller = view(config);
     var dimensions = config.dimensions || {
         width: 900,
@@ -55,6 +72,7 @@ var flaskfiller = function(config) {
             height: CONTAINER.height - dimensions.ruler_width - dimensions.margins.top - dimensions.margins.bottom
         };
 
+    const snap_values = {};
 
     _flaskfiller.fragment = document
         .createDocumentFragment()
@@ -104,11 +122,12 @@ var flaskfiller = function(config) {
     function add_glass(model) {
         var glass;
         if (model.type === "longdrink") {
-            glass = longdrink(canvas, model, scale);
+            glass = longdrink(canvas, model, scale, snap_values);
         } else {
-            glass = various_glass(canvas, model, scale);
+            glass = various_glass(canvas, model, scale, snap_values);
         }
         glass.toFront();
+
         return glass;
     }
 
@@ -126,7 +145,6 @@ var flaskfiller = function(config) {
         }
 
         update_glass(model.glass);
-
     };
 
     _flaskfiller.remove = function(model_name) {

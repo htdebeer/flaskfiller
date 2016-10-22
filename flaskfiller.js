@@ -2358,6 +2358,24 @@ $(window).on("beforeunload", function () {
 });
 
 },{"./flaskfiller.js":3}],10:[function(require,module,exports){
+/*
+ * Copyright 2012, 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
+ *
+ * This file is part of FlaskFiller.
+ *
+ * FlaskFiller is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * FlaskFiller is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
+ */
 var paths = require("../../path");
 
 var contour_line = function(canvas, shape_, BOUNDARIES) {
@@ -2920,14 +2938,31 @@ var contour_line = function(canvas, shape_, BOUNDARIES) {
 module.exports = contour_line;
 
 },{"../../path":7}],11:[function(require,module,exports){
+/*
+ * Copyright 2012, 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
+ *
+ * This file is part of FlaskFiller.
+ *
+ * FlaskFiller is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * FlaskFiller is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
+ */
+const view = require("../view");
+const dom = require("../../dom");
+const ruler = require("./ruler");
+const longdrink = require("./longdrink_glass");
+const various_glass = require("./glass");
 
-var view = require("../view"),
-    dom = require("../../dom"),
-    ruler = require("./ruler"),
-    longdrink = require("./longdrink_glass"),
-    various_glass = require("./glass");
-
-var flaskfiller = function(config) {
+const flaskfiller = function(config) {
     var _flaskfiller = view(config);
     var dimensions = config.dimensions || {
         width: 900,
@@ -2977,6 +3012,7 @@ var flaskfiller = function(config) {
             height: CONTAINER.height - dimensions.ruler_width - dimensions.margins.top - dimensions.margins.bottom
         };
 
+    const snap_values = {};
 
     _flaskfiller.fragment = document
         .createDocumentFragment()
@@ -3026,11 +3062,12 @@ var flaskfiller = function(config) {
     function add_glass(model) {
         var glass;
         if (model.type === "longdrink") {
-            glass = longdrink(canvas, model, scale);
+            glass = longdrink(canvas, model, scale, snap_values);
         } else {
-            glass = various_glass(canvas, model, scale);
+            glass = various_glass(canvas, model, scale, snap_values);
         }
         glass.toFront();
+
         return glass;
     }
 
@@ -3048,7 +3085,6 @@ var flaskfiller = function(config) {
         }
 
         update_glass(model.glass);
-
     };
 
     _flaskfiller.remove = function(model_name) {
@@ -3068,7 +3104,25 @@ var flaskfiller = function(config) {
 module.exports = flaskfiller;
 
 },{"../../dom":2,"../view":18,"./glass":12,"./longdrink_glass":14,"./ruler":15}],12:[function(require,module,exports){
-var glass = function(canvas, model, SCALE) {
+/*
+ * Copyright 2012, 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
+ *
+ * This file is part of FlaskFiller.
+ *
+ * FlaskFiller is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * FlaskFiller is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
+ */
+var glass = function(canvas, model, SCALE, snap_values) {
     var _glass = canvas.set();
 
     var GLASS_BORDER = 3;
@@ -3079,7 +3133,6 @@ var glass = function(canvas, model, SCALE) {
         height;
 
     var PADDING = 5;
-
 
     function update() {
         fill.attr("fill", model.color());
@@ -3187,16 +3240,19 @@ var glass = function(canvas, model, SCALE) {
     }
     _glass.set_label = set_label;
 
-
     var delta_x = 0, delta_y = 0;
     function onmove(dx, dy) {
-        delta_x = dx;
+        // Use snap values
+        let new_x = _glass.x + dx;
+        new_x = Raphael.snapTo(get_snap_values(), new_x);
+        delta_x = new_x - _glass.x;
         delta_y = dy;
-        _glass.draw_at(_glass.x+dx, _glass.y+dy);
+        _glass.draw_at(new_x, _glass.y+dy);
+        set_snap_value(mid(true));
     }
-    
 
     function onstart() {
+        console.log("Start: ", snap_values, get_snap_values());
         model.action("pause").callback(model)();
         delta_x = 0;
         delta_y = 0;
@@ -3266,8 +3322,26 @@ var glass = function(canvas, model, SCALE) {
         fill.attr("fill", model.color());
     }
 
+    function mid(absolute) {
+      const bbox = _glass.getBBox();
+      const half_width = bbox.width / 2;
+      if (absolute) {
+        return x + half_width;
+      } else {
+        return half_width;
+      }
+    }
+
+    function set_snap_value(value) {
+      snap_values[model.name] = value;
+    }
+
+    function get_snap_values() {
+      return Object.keys(snap_values).map(function (m) {return snap_values[m] - mid();});
+    }
 
     draw();
+    set_snap_value(mid(true));
     _glass.height = height;
     _glass.width = width;
     _glass.x = x;
@@ -3288,11 +3362,27 @@ var glass = function(canvas, model, SCALE) {
 module.exports = glass;
 
 },{}],13:[function(require,module,exports){
-
-
-var dom = require("../../dom");
-var ruler = require("./ruler");
-var contour_line = require("./contour_line");
+/*
+ * Copyright 2012, 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
+ *
+ * This file is part of FlaskFiller.
+ *
+ * FlaskFiller is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * FlaskFiller is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
+ */
+const dom = require("../../dom");
+const ruler = require("./ruler");
+const contour_line = require("./contour_line");
 
 var glass_grafter = function(config) {
     var _grafter = {};
@@ -3565,16 +3655,33 @@ var glass_grafter = function(config) {
 module.exports = glass_grafter;
 
 },{"../../dom":2,"./contour_line":10,"./ruler":15}],14:[function(require,module,exports){
+/*
+ * Copyright 2012, 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
+ *
+ * This file is part of FlaskFiller.
+ *
+ * FlaskFiller is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * FlaskFiller is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-var glass = require("./glass");
+const glass = require("./glass");
 
-var longdrink_glass = function(canvas, model, SCALE, boundaries_) {
-    var HANDLE_SPACE = 15,
-        HANDLE_SIZE = 2.5;
+const longdrink_glass = function(canvas, model, SCALE, snap_values, boundaries_) {
+    const HANDLE_SPACE = 15;
+    const    HANDLE_SIZE = 2.5;
+    const PADDING = 5;
 
-    var PADDING = 5;
-
-    var _glass = glass(canvas, model, SCALE, boundaries_);
+    let _glass = glass(canvas, model, SCALE, snap_values, boundaries_);
 
     _glass.handle = canvas.circle( 
             _glass.x + _glass.width + HANDLE_SPACE, 
@@ -3588,14 +3695,13 @@ var longdrink_glass = function(canvas, model, SCALE, boundaries_) {
     _glass.handle.hover(enable_resizing, disable_resizing);
     _glass.handle.drag(sizemove, sizestart, sizestop);
 
-    var old_height, old_radius, delta_x, delta_y;
+    let old_height, old_radius, delta_x, delta_y;
     function sizemove(dx, dy) {
-        var 
-            d_height = dy / SCALE / 10,
-            d_radius = dx / 2 / SCALE / 10,
-            new_radius = old_radius + d_radius,
-            new_height = old_height - d_height,
-            area = Math.PI * new_radius * new_radius;
+        let d_height = dy / SCALE / 10;
+        let d_radius = dx / 2 / SCALE / 10;
+        let new_radius = old_radius + d_radius;
+        let new_height = old_height - d_height;
+        let area = Math.PI * new_radius * new_radius;
 
 
         if (area*new_height >= 5){
@@ -3619,7 +3725,6 @@ var longdrink_glass = function(canvas, model, SCALE, boundaries_) {
         _glass.y += delta_y;
         model.get_views_of_type("graph").forEach(function(v) {v.update_all();});
     }
-
 
     function enable_resizing() {
         _glass.handle.attr({
@@ -3650,22 +3755,22 @@ var longdrink_glass = function(canvas, model, SCALE, boundaries_) {
     }
 
     function update_size() {
-        var bbox = _glass.glass_pane.getBBox();
+        const bbox = _glass.glass_pane.getBBox();
 
         _glass.width = bbox.width;
         _glass.height = bbox.height;
     }
 
     _glass.draw_at = function (x, y) {
-
         _glass.fill.attr({path: model.bowl_path(SCALE, true, x, y)});
         _glass.bowl_shape.attr({path: model.bowl_path(SCALE, false, x, y)});
         _glass.base_shape.attr({path: model.base_path(SCALE, x, y)});
         _glass.glass_pane.attr({path: model.path(SCALE, false, x, y)});
         update_size();
-        var MAX_LINE_WIDTH = Math.min(30, _glass.width / 2),
-            MAX_LINE_SKIP = 5,
-            MAX_LINE_Y = y + _glass.height - model.get_maximum("hoogte") * 10 * SCALE;
+        const MAX_LINE_WIDTH = Math.min(30, _glass.width / 2);
+        const MAX_LINE_SKIP = 5;
+        const MAX_LINE_Y = y + _glass.height - model.get_maximum("hoogte") * 10 * SCALE;
+
         _glass.max_line.attr({
             path: "M" + x + "," + MAX_LINE_Y + 
                 "h" + MAX_LINE_WIDTH
@@ -3683,7 +3788,7 @@ var longdrink_glass = function(canvas, model, SCALE, boundaries_) {
     };
 
     _glass.set_label = function(x_, y_) {
-        var x = x_, y = y_;
+        let x = x_, y = y_;
         model.compute_maxima();
         _glass.label.attr({
             x: x + _glass.width / 2,
@@ -3691,12 +3796,11 @@ var longdrink_glass = function(canvas, model, SCALE, boundaries_) {
             "font-size": compute_font_size(),
             text: model.get_maximum("volume") + " ml"
         });
+
         function compute_font_size() {
-            return Math.max((((_glass.width - 2*PADDING)/ ((model.get_maximum("volume") + "").length + 3)) - PADDING), 8) + "px";
+            return Math.max((_glass.width - 2*PADDING)/ ((model.get_maximum("volume") + "").length + 3) - PADDING), 8 + "px";
         }
     };
-
-
 
     return _glass;
 };
@@ -3704,6 +3808,24 @@ var longdrink_glass = function(canvas, model, SCALE, boundaries_) {
 module.exports = longdrink_glass;
 
 },{"./glass":12}],15:[function(require,module,exports){
+/*
+ * Copyright 2012, 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
+ *
+ * This file is part of FlaskFiller.
+ *
+ * FlaskFiller is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * FlaskFiller is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
+ */
 var ruler = function(canvas, config, MEASURE_LINE_WIDTH_) {
     var _ruler = canvas.set();
 
@@ -5079,6 +5201,7 @@ module.exports = table;
  */
 const view = function(config) {
   const _view = {};
+  _view.snap_values = {};
 
   // Quantities to show
   const show = function(quantity) {

@@ -1,8 +1,24 @@
-
-
-var dom = require("../../dom");
-var ruler = require("./ruler");
-var contour_line = require("./contour_line");
+/*
+ * Copyright 2012, 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
+ *
+ * This file is part of FlaskFiller.
+ *
+ * FlaskFiller is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * FlaskFiller is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
+ */
+const dom = require("../../dom");
+const ruler = require("./ruler");
+const contour_line = require("./contour_line");
 
 var glass_grafter = function(config) {
     var _grafter = {};

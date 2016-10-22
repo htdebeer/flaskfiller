@@ -1,4 +1,22 @@
-var glass = function(canvas, model, SCALE) {
+/*
+ * Copyright 2012, 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
+ *
+ * This file is part of FlaskFiller.
+ *
+ * FlaskFiller is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * FlaskFiller is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
+ */
+var glass = function(canvas, model, SCALE, snap_values) {
     var _glass = canvas.set();
 
     var GLASS_BORDER = 3;
@@ -9,7 +27,6 @@ var glass = function(canvas, model, SCALE) {
         height;
 
     var PADDING = 5;
-
 
     function update() {
         fill.attr("fill", model.color());
@@ -117,16 +134,19 @@ var glass = function(canvas, model, SCALE) {
     }
     _glass.set_label = set_label;
 
-
     var delta_x = 0, delta_y = 0;
     function onmove(dx, dy) {
-        delta_x = dx;
+        // Use snap values
+        let new_x = _glass.x + dx;
+        new_x = Raphael.snapTo(get_snap_values(), new_x);
+        delta_x = new_x - _glass.x;
         delta_y = dy;
-        _glass.draw_at(_glass.x+dx, _glass.y+dy);
+        _glass.draw_at(new_x, _glass.y+dy);
+        set_snap_value(mid(true));
     }
-    
 
     function onstart() {
+        console.log("Start: ", snap_values, get_snap_values());
         model.action("pause").callback(model)();
         delta_x = 0;
         delta_y = 0;
@@ -196,8 +216,26 @@ var glass = function(canvas, model, SCALE) {
         fill.attr("fill", model.color());
     }
 
+    function mid(absolute) {
+      const bbox = _glass.getBBox();
+      const half_width = bbox.width / 2;
+      if (absolute) {
+        return x + half_width;
+      } else {
+        return half_width;
+      }
+    }
+
+    function set_snap_value(value) {
+      snap_values[model.name] = value;
+    }
+
+    function get_snap_values() {
+      return Object.keys(snap_values).map(function (m) {return snap_values[m] - mid();});
+    }
 
     draw();
+    set_snap_value(mid(true));
     _glass.height = height;
     _glass.width = width;
     _glass.x = x;

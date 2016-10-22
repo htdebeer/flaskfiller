@@ -1,13 +1,30 @@
+/*
+ * Copyright 2012, 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
+ *
+ * This file is part of FlaskFiller.
+ *
+ * FlaskFiller is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * FlaskFiller is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-var glass = require("./glass");
+const glass = require("./glass");
 
-var longdrink_glass = function(canvas, model, SCALE, boundaries_) {
-    var HANDLE_SPACE = 15,
-        HANDLE_SIZE = 2.5;
+const longdrink_glass = function(canvas, model, SCALE, snap_values, boundaries_) {
+    const HANDLE_SPACE = 15;
+    const    HANDLE_SIZE = 2.5;
+    const PADDING = 5;
 
-    var PADDING = 5;
-
-    var _glass = glass(canvas, model, SCALE, boundaries_);
+    let _glass = glass(canvas, model, SCALE, snap_values, boundaries_);
 
     _glass.handle = canvas.circle( 
             _glass.x + _glass.width + HANDLE_SPACE, 
@@ -21,14 +38,13 @@ var longdrink_glass = function(canvas, model, SCALE, boundaries_) {
     _glass.handle.hover(enable_resizing, disable_resizing);
     _glass.handle.drag(sizemove, sizestart, sizestop);
 
-    var old_height, old_radius, delta_x, delta_y;
+    let old_height, old_radius, delta_x, delta_y;
     function sizemove(dx, dy) {
-        var 
-            d_height = dy / SCALE / 10,
-            d_radius = dx / 2 / SCALE / 10,
-            new_radius = old_radius + d_radius,
-            new_height = old_height - d_height,
-            area = Math.PI * new_radius * new_radius;
+        let d_height = dy / SCALE / 10;
+        let d_radius = dx / 2 / SCALE / 10;
+        let new_radius = old_radius + d_radius;
+        let new_height = old_height - d_height;
+        let area = Math.PI * new_radius * new_radius;
 
 
         if (area*new_height >= 5){
@@ -52,7 +68,6 @@ var longdrink_glass = function(canvas, model, SCALE, boundaries_) {
         _glass.y += delta_y;
         model.get_views_of_type("graph").forEach(function(v) {v.update_all();});
     }
-
 
     function enable_resizing() {
         _glass.handle.attr({
@@ -83,22 +98,22 @@ var longdrink_glass = function(canvas, model, SCALE, boundaries_) {
     }
 
     function update_size() {
-        var bbox = _glass.glass_pane.getBBox();
+        const bbox = _glass.glass_pane.getBBox();
 
         _glass.width = bbox.width;
         _glass.height = bbox.height;
     }
 
     _glass.draw_at = function (x, y) {
-
         _glass.fill.attr({path: model.bowl_path(SCALE, true, x, y)});
         _glass.bowl_shape.attr({path: model.bowl_path(SCALE, false, x, y)});
         _glass.base_shape.attr({path: model.base_path(SCALE, x, y)});
         _glass.glass_pane.attr({path: model.path(SCALE, false, x, y)});
         update_size();
-        var MAX_LINE_WIDTH = Math.min(30, _glass.width / 2),
-            MAX_LINE_SKIP = 5,
-            MAX_LINE_Y = y + _glass.height - model.get_maximum("hoogte") * 10 * SCALE;
+        const MAX_LINE_WIDTH = Math.min(30, _glass.width / 2);
+        const MAX_LINE_SKIP = 5;
+        const MAX_LINE_Y = y + _glass.height - model.get_maximum("hoogte") * 10 * SCALE;
+
         _glass.max_line.attr({
             path: "M" + x + "," + MAX_LINE_Y + 
                 "h" + MAX_LINE_WIDTH
@@ -116,7 +131,7 @@ var longdrink_glass = function(canvas, model, SCALE, boundaries_) {
     };
 
     _glass.set_label = function(x_, y_) {
-        var x = x_, y = y_;
+        let x = x_, y = y_;
         model.compute_maxima();
         _glass.label.attr({
             x: x + _glass.width / 2,
@@ -124,12 +139,11 @@ var longdrink_glass = function(canvas, model, SCALE, boundaries_) {
             "font-size": compute_font_size(),
             text: model.get_maximum("volume") + " ml"
         });
+
         function compute_font_size() {
-            return Math.max((((_glass.width - 2*PADDING)/ ((model.get_maximum("volume") + "").length + 3)) - PADDING), 8) + "px";
+            return Math.max((_glass.width - 2*PADDING)/ ((model.get_maximum("volume") + "").length + 3) - PADDING), 8 + "px";
         }
     };
-
-
 
     return _glass;
 };

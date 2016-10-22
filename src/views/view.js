@@ -18,6 +18,7 @@
  */
 const view = function(config) {
   const _view = {};
+  _view.snap_values = {};
 
   // Quantities to show
   const show = function(quantity) {
