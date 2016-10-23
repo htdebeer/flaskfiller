@@ -1,5 +1,5 @@
 ---
-title: FlessenVuller: Educatieve software om momentane snelheid te onderzoeken
+title: FlessenVuller—Educatieve software om momentane snelheid te onderzoeken
 author: Huub de Beer
 keywords:
 - wiskundeonderwijs

@@ -1,5 +1,5 @@
 ---
-title: FlaskFiller: Educational Software to Explore Instantaneous Speed
+title: FlaskFiller—Educational Software to Explore Instantaneous Speed
 author: Huub de Beer
 keywords:
 - mathematics education
