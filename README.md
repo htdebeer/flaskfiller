@@ -6,7 +6,7 @@ part of a [research on teaching instantaneous speed in grade
 5](https://heerdebeer.org/DR/). During this research, four teaching
 experiments have been performed. Each experiment used a new version of the
 software. After the last experiment a new more polished version of FlaskFiller
-is made. You can download this latest version [here](standalone-flaskfiller.html).
+is made. You can download this latest version [here](https://heerdebeer.org/Software/flaskfiller/standalone_flaskfiller.html).
 
 FlaskFiller is [free software](https://www.gnu.org/philosophy/free-sw.en.html)
 released under the [GPL version
@@ -28,7 +28,7 @@ FlaskFiller used the following libraries:
 # Installing and using FlaskFiller
 
 FlaskFiller is released both as a [standalone HTML
-file](standalone-flaskfiller.html) which can be used without an internet
+file](https://heerdebeer.org/Software/flaskfiller/standalone_flaskfiller.html) which can be used without an internet
 connection and a [source repository](https://github.com/htdebeer/flaskfiller)
 you can clone and install on your server or locally. The latter can be
 accomplished on a unix-like operating system as follows:

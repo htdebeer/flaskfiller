@@ -16,7 +16,7 @@ in groep 7](https://heerdebeer.org/DR/). Tijdens dit onderzoek zijn er een
 viertal onderwijsexperimenten uitgevoerd. In elk onderwijsexperiment werd een
 verbeterde versie van FlessenVuller gebruikt. Na het laatste experiment is een
 meer afgewerkte versie gemaakt. Je kunt deze laatste versie [hier
-downloaden](standalone-flessenvuller.html).
+downloaden](standalone_flessenvuller.html).
 
 
 FlessenVuller is [free software](https://www.gnu.org/philosophy/free-sw.en.html) en wordt vrijgegeven onder de [GPL versie
@@ -38,7 +38,7 @@ FlessenVuller maakt gebruik van de volgende bibliotheken:
 # Installatie en gebruik van FlessenVuller
 
 Flessenvuller kan gedownload worden als een [standalone HTML
-bestand](standalone-flessenvuller.html) dat zonder internet werkt of het kan
+bestand](standalone_flessenvuller.html) dat zonder internet werkt of het kan
 gedownload worden als een [broncode
 repository](https://github.com/htdebeer/flaskfiller). Je kunt de broncode
 klonen en installeren op je server of computer. Je doet dit op een unix-achtig
