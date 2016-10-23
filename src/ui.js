@@ -74,6 +74,18 @@ const toggleComponent = function (settingElt, componentName) {
       component.hide();
     }
 };
+  
+const toggleColumn = function (col) {
+  return function () {
+    const setting = $(this);
+    const column = $("#table td[data-quantity='" + col + "'], #table th[data-quantity='" + col + "']");
+    if (setting.prop("checked")) {
+      column.show();
+    } else {
+      column.hide();
+    }
+  };
+};
 
 const SETTINGS = [{
   name: "components.simulation",
@@ -112,6 +124,13 @@ const SETTINGS = [{
   type: "checkbox",
   onChange: function () {
     toggleComponent(this, "table");
+  }
+},{
+  name: "components.designer",
+  selector: "input[name='components'][value='designer']",
+  type: "checkbox",
+  onChange: function () {
+    toggleComponent(this, "designer");
   }
 },{
   name: "simulation.world-height",
@@ -214,6 +233,30 @@ const SETTINGS = [{
       moveHandles.hide();
     }
   }
+},{
+  name: "table.quantities.height",
+  selector: "input[name='table-quantities'][value='height']",
+  type: "checkbox",
+  onChange: toggleColumn("hoogte"),
+  reload: true
+},{
+  name: "table.quantities.volume",
+  selector: "input[name='table-quantities'][value='volume']",
+  type: "checkbox",
+  onChange: toggleColumn("volume"),
+  reloas: true
+},{
+  name: "table.quantities.time",
+  selector: "input[name='table-quantities'][value='time']",
+  type: "checkbox",
+  onChange: toggleColumn("tijd"),
+  reload: true
+},{
+  name: "table.quantities.speed",
+  selector: "input[name='table-quantities'][value='speed']",
+  type: "checkbox",
+  onChange: toggleColumn("stijgsnelheid"),
+  reload: true
 },{
   name: "glasses.cocktail",
   selector: "input[name='glasses'][value='cocktail']",
@@ -432,7 +475,13 @@ const getConfiguration = function () {
   config.table = {
     id: "table"
   };
-  
+
+  /*
+  config.glassgrafter = {
+    id: "designer"
+  };
+  */
+
   return config;
 };
 

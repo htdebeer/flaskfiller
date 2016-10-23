@@ -17,14 +17,15 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<html lang="nl">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="keywords" content="wiskundeonderwijs, basisschool, differentiaalrekening, momentane snelheid, snelheid">
-    <title>Flessenvuller: Onderzoek momentane snelheid in the context van
-      glazen vullen</title>
+    <meta name="keywords" content="mathematic education, primary education,
+    calculus, instantanoues speed, speed">
+    <title>FlaskFiller: Explore Instantaneous Speed in the Context of Filling
+      Glassware</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="flaskfiller.css">
@@ -37,19 +38,19 @@ along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
           <li class="nav-item">
             <a class="nav-link active" href="#filler" data-toggle="tab" role="tab">
               <span class="icon fa fa-glass"></span>
-              <span class="hidden-sm-down">FlessenVuller</span>
+              <span class="hidden-sm-down">FlaskFiller</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#settings" data-toggle="tab" role="tab">
               <span class="icon fa fa-wrench"></span>
-              <span class="hidden-sm-down">Instellingen</span>
+              <span class="hidden-sm-down">Settings</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#information" data-toggle="tab" role="tab">
               <span class="icon fa fa-info"></span>
-              <span class="hidden-sm-down">Informatie</span>
+              <span class="hidden-sm-down">Info</span>
             </a>
           </li>
           <li class="nav-item">
@@ -95,7 +96,7 @@ along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
         -->
         <div class="tab-pane" id="settings" role="tabpanel">
           <div class="alert alert-info invisible" id="reload-message" role="alert">
-            Herlaad de pagina om de veranderingen door te voeren.
+            Reload the page for the changes to take effect.
           </div>
           <div id="settings-accordion" role="tablist" aria-multiselectable="true">
 
@@ -106,7 +107,7 @@ along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
                     <a data-toggle="collapse" data-parent="#settings-accordion"
                       href="#collapse-settings-general" aria-expanded="true"
                       aria-controls="collapse-settings-general">
-                      Algemeen
+                      General
                     </a>
                   </h4>
                 </div>
@@ -114,35 +115,35 @@ along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
                   aria-labelledby="settings-general">
                   <fieldset class="form-group row">
                     <legend class="col-form-legend col-sm-4">
-                      Componenten
+                      Components
                     </legend>
                     <div class="col-sm-8">
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="components" value="simulation" checked>
-                          Simulatie
+                          Simulation
                         </label>
                       </div>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="components" value="graph" checked>
-                          Grafiek
+                          Graph
                         </label>
                       </div>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="components" value="table" checked>
-                          Tabel
+                          Table
                         </label>
                       </div>
                       <div class="form-check disabled">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="components" value="control" checked disabled>
-                          Besturing
+                          Control
                         </label>
                       </div>
                       <!--
@@ -150,7 +151,7 @@ along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="components" value="designer">
-                          Glas ontwerper
+                          Glass designer
                         </label>
                       </div>
                       -->
@@ -165,7 +166,7 @@ along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
                     <a data-toggle="collapse" class="collapsed" data-parent="#settings-accordion"
                       href="#collapse-settings-simulation" aria-expanded="true"
                       aria-controls="collapse-settings-simulation">
-                      Simulatie
+                      Simulation
                     </a>
                   </h4>
                 </div>
@@ -174,7 +175,8 @@ along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
                   aria-labelledby="settings-simulation">
 
                   <div class="form-group row">
-                    <label for="world-height" class="form-label col-sm-4">Hoogte wereld</label>
+                    <label for="world-height" class="form-label
+                      col-sm-4">World height</label>
                     <div class="col-sm-8">
                       <input class="form-control" type="number" value="18"
                       name="world-height"
@@ -191,7 +193,7 @@ along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
                     <a data-toggle="collapse" class="collapsed" data-parent="#settings-accordion"
                       href="#collapse-settings-graph" aria-expanded="true"
                       aria-controls="collapse-settings-graph">
-                      Grafiek
+                      Graph
                     </a>
                   </h4>
                 </div>
@@ -200,55 +202,55 @@ along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
                   aria-labelledby="settings-graph">
                   <div class="form-group row">
                     <label for="horizontal-axis" class="form-label
-                      col-sm-4">Horizontale as</label>
+                      col-sm-4">Horizontal axis</label>
                     <div class="col-sm-8">
                       <select class="custom-select" name="horizontal-axis"
                         id="horizontal-axis">
-                        <option value="height">Hoogte</option>
+                        <option value="height">Height</option>
                         <option value="volume">Volume</option>
-                        <option value="time" selected>Tijd</option>
-                        <option value="speed">Stijgsnelheid</option>
+                        <option value="time" selected>Time</option>
+                        <option value="speed">Rising speed</option>
                       </select>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="vertical-axis" class="form-label
-                      col-sm-4">Verticale as</label>
+                      col-sm-4">Vertical axis</label>
                     <div class="col-sm-8">
                       <select class="custom-select" name="vertical-axis"
                         id="vertical-axis">
-                        <option value="height" selected>Hoogte</option>
+                        <option value="height" selected>Height</option>
                         <option value="volume">Volume</option>
-                        <option value="time">Tijd</option>
-                        <option value="speed">Stijgsnelheid</option>
+                        <option value="time">Time</option>
+                        <option value="speed">Rising speed</option>
                       </select>
                     </div>
                   </div>
 
                   <fieldset class="form-group row">
                     <legend class="col-form-legend col-sm-4">
-                      Grafiektypen
+                      Graph types
                     </legend>
                     <div class="col-sm-8">
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="graph-types" value="arrow">
-                          Pijlgrafiek
+                          Arrow graph
                         </label>
                       </div>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="graph-types" value="bar">
-                          Staafjesgrafiek
+                          Bar graph
                         </label>
                       </div>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="graph-types" value="line" checked>
-                          Lijngrafiek
+                          Line graph
                         </label>
                       </div>
                     </div>
@@ -256,43 +258,42 @@ along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
 
                   <fieldset class="form-group row">
                     <legend class="col-form-legend col-sm-4">
-                      Opties
+                      Options
                     </legend>
                     <div class="col-sm-8">
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="graph-options" value="coordinates" checked>
-                          Laat coordinaten zien
+                          Show coordinates
                         </label>
                       </div>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="graph-options" value="speed">
-                          Laat snelheid zien
+                          Show speed
                         </label>
                       </div>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="graph-options" value="tangent-line">
-                          Laat raaklijn zien
+                          Show tangent line
                         </label>
                       </div>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="graph-options" value="step" checked>
-                          Laat stapgroottebesturing pijl- en staafgrafiek zien
+                          Show step control for arrow and bar graphs
                         </label>
                       </div>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="graph-options" value="move-highball">
-                          Beweegbare grafiek van het uitrekbare
-                          longdrinkglaasje
+                          Moveable graph of the extensible highball glass
                         </label>
                       </div>
                     </div>
@@ -306,7 +307,7 @@ along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
                     <a data-toggle="collapse" class="collapsed" data-parent="#settings-accordion"
                       href="#collapse-settings-table" aria-expanded="true"
                       aria-controls="collapse-settings-table">
-                      Tabel
+                      Table
                     </a>
                   </h4>
                 </div>
@@ -315,21 +316,21 @@ along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
                   aria-labelledby="settings-table">
                   <fieldset class="form-group row">
                     <legend class="col-form-legend col-sm-4">
-                      Grootheden
+                      Quantities
                     </legend>
                     <div class="col-sm-8">
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="table-quantities" value="height" checked>
-                          Hoogte
+                          Height
                         </label>
                       </div>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="table-quantities" value="time" checked>
-                          Tijd
+                          Time
                         </label>
                       </div>
                       <div class="form-check">
@@ -343,7 +344,7 @@ along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="table-quantities" value="speed">
-                          Stijgsnelheid
+                          Rising speed
                         </label>
                       </div>
                     </div>
@@ -357,7 +358,7 @@ along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
                     <a data-toggle="collapse" class="collapsed" data-parent="#settings-accordion"
                       href="#collapse-settings-control" aria-expanded="true"
                       aria-controls="collapse-settings-control">
-                      Besturing
+                      Control
                     </a>
                   </h4>
                 </div>
@@ -366,49 +367,49 @@ along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
                   aria-labelledby="settings-control">
                   <fieldset class="form-group row">
                     <legend class="col-form-legend col-sm-4">
-                      Toe te voegen glazen
+                      Glasses to add
                     </legend>
                     <div class="col-sm-8">
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="glasses" value="cocktail" checked>
-                          Cocktailglas
+                          Cocktail glass
                         </label>
                       </div>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="glasses" value="highball" checked>
-                          Longdrinkglas
+                          Highball glass
                         </label>
                       </div>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="glasses" value="extensible-highball" checked>
-                          Uitrekbaar longdrinkglas
+                          Extensible highball glass
                         </label>
                       </div>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="glasses" value="wine" checked>
-                          Wijnglas
+                          Wine glass
                         </label>
                       </div>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="glasses" value="cognac" checked>
-                          Cognacglas
+                          Cognac glass
                         </label>
                       </div>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input class="form-check-input" type="checkbox"
                           name="glasses" value="beer" checked>
-                          Bierglas
+                          Beer glass
                         </label>
                       </div>
                       <!-- Add these later
@@ -439,28 +440,50 @@ along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
           educational design projects it was developed in 
         -->
         <div class="tab-pane" id="information" role="tabpanel">
-          <h1 id="flessenvuller">Flessenvuller</h1>
-          <p>FlessenVuller is gemaakt als onderdeel van een <a href="https://heerdebeer.org/DR/">onderzoek naar het onderwijzen van momentane snelheid in groep 7 van de basisschool</a>. Tijdens dat onderzoek zijn een viertal onderwijsexperimenten uitgevoerd, steeds met een verbeterde versie van de Flessenvuller software. De versie die je nu ziet, is de laatste versie.</p>
-          <h2 id="software">Software</h2>
-          <p>De Flessenvuller software is zogenaamde <a href="https://www.gnu.org/philosophy/free-sw.en.html">vrije software</a> vrijgegeven onder de <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPL versie 3 softwarelicentie</a>. Dit houdt in dat je het mag gebruiken, aanpassen, en verspreiden zolang die aanpassingen ook onder deze licentie vallen.</p>
-          <p>Flessenvuller is gemaakt met behulp van de volgende stukken software en bibliotheken:</p>
+          <h1>FlaskFiller</h1>
+          
+          <p>FlaskFiller is made as part of a <a
+              href="https://heerdebeer.org/DR/">research on teaching
+              instantaneous speed in 5th grade</a>. During that research, four
+            teaching experiments have been performed, each time with an
+            improved version of the FlaskFiller software. The version you are
+            working with now is the latest incarnation.</p>
+          <h2>Software</h2>
+
+          <p>FlaskFiller is <a
+              href="https://www.gnu.org/philosophy/free-sw.en.html">free
+              software</a> and is released under the <a
+              href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPL version 3
+              license</a>. This means you can use, adapt, and distribute
+            FlaskFiller as long as these adaptations are also published under
+            the same license.</p>
+
+          <p>FlaskFiller is made using the following libraries and
+            programs:</p>
           <ul>
-            <li><a href="http://dmitrybaranovskiy.github.io/raphael/">Raphaël.js</a> voor de simulatie</li>
-            <li><a href="https://d3js.org/">d3</a> voor de grafiek</li>
-            <li><a href="https://v4-alpha.getbootstrap.com/">Bootstrap</a> en <a href="https://blog.jquery.com/">jQuery</a> voor het menu, tabs, en instellingenpagina</li>
-            <li><a href="http://fontawesome.io/">Font awesome</a> voor de iconen</li>
-            <li><a href="http://browserify.org/">Browserify</a> om alles aaneen te knopen</li>
-            <li>en <a href="http://pandoc.org/">pandoc</a> om de standalone versie te genereren</li>
+            <li><a
+                href="http://dmitrybaranovskiy.github.io/raphael/">Raphaël.js</a>
+            for the simulation component</li>
+            <li><a href="https://d3js.org/">d3</a> for the graph component</li>
+            <li><a href="https://v4-alpha.getbootstrap.com/">Bootstrap</a> and
+              <a href="https://blog.jquery.com/">jQuery</a> for the menu,
+              tabs, and settings page</li>
+            <li><a href="http://fontawesome.io/">Font awesome</a> for the
+              icons</li>
+            <li><a href="http://browserify.org/">Browserify</a> to create the
+            FlaskFiller javascript library</li>
+            <li>and <a href="http://pandoc.org/">pandoc</a> to generate the
+              standalone verion</li>
           </ul>
-          <p>Je kunt de FlessenVuller software downloaden van <a
-              href="https://heerdebeer.org/Software/flessenvuller/">heerdebeer.org/Software/flessenvuller/</a>.</p>
+          <p>You can download FlaskFiller from <a
+              href="https://heerdebeer.org/Software/flaskfiller/">heerdebeer.org/Software/flaskfiller/</a>.</p>
         </div>
         <!-- 
           Help on using flaskfiller
         -->
         <div class="tab-pane" id="help" role="tabpanel">
           <p>
-            Hoe Flessenvuller te gebruiken:
+            How to use FlaskFiller
           </p>
         </div>
       </div>

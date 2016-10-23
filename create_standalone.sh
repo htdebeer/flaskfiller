@@ -37,14 +37,14 @@
 #   how to install and use pandoc.
 ##
 
-TEMPLATE={$1:-flaskfiller.html}
+TEMPLATE=${1:-flaskfiller.html}
 
 # Two default templates are defined
-if [ "$TEMPLATE"=="nl" ]; then
+if [[ "$TEMPLATE" == "nl" ]]; then
   TEMPLATE="flessenvuller.html"
 else 
-  if [ "LANGUAGE"=="en" ]; then
-    TEMPLATE="flessenvuller.html"
+  if [[ "$TEMPLATE" == "en" ]]; then
+    TEMPLATE="flaskfiller.html"
   fi
 fi 
 

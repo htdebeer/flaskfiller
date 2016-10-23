@@ -1,4 +1,13 @@
-# FlaskFiller
+---
+title: FlaskFiller: Educational Software to Explore Instantaneous Speed
+author: Huub de Beer
+keywords:
+- mathematics education
+- primary education
+- instantaneous speed
+- speed
+- calculus
+...
 
 FlaskFiller is an educational tool to explore instantaneous speed
 qualitatively and quantitatively in primary school. FlaskFiller is made as

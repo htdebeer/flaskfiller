@@ -160,7 +160,7 @@ const table = function(config) {
           name: "th",
           value: quantity.name.replace("_", " "),
           attributes: {
-            "data-quantity": "true"
+            "data-quantity": quantity.name
           }
         }));
       };                            
