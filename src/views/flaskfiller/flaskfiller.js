@@ -134,6 +134,7 @@ const flaskfiller = function(config) {
     function update_glass(glass) {
         glass.update_color();        
         glass.update();
+        glass.set_snap_value();
     }
 
     _flaskfiller.update = function(model_name) {

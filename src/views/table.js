@@ -75,7 +75,7 @@ const table = function(config) {
     return {
       name: "select",
       attributes: {
-        "class": "model_list"
+        "class": "model_list form-control"
       },
       children: [{
         name: "option",
@@ -101,13 +101,7 @@ const table = function(config) {
         attributes: {
           "data-list": true
         },
-        children: [
-        {
-          name: "i",
-          attributes: {
-            "class": "fa fa-plus"
-          }
-        }, create_model_option_list(config.models)]
+        children: [create_model_option_list(config.models)]
       }, {
         name: "th",
         attributes: {
@@ -276,6 +270,7 @@ const table = function(config) {
 
         };
       } else {
+        attributes["class"] = attributes["class"] + " btn";
         if (action.toggled) {
           attributes["data-toggled"] = true;
         }

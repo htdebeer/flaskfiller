@@ -15,7 +15,8 @@ part of a [research on teaching instantaneous speed in grade
 5](https://heerdebeer.org/DR/). During this research, four teaching
 experiments have been performed. Each experiment used a new version of the
 software. After the last experiment a new more polished version of FlaskFiller
-is made. You can download this latest version [here](standalone_flaskfiller.html).
+is made. You can download this latest version
+[here](standalone_flaskfiller.html).
 
 FlaskFiller is [free software](https://www.gnu.org/philosophy/free-sw.en.html)
 released under the [GPL version

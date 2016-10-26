@@ -3123,6 +3123,7 @@ const flaskfiller = function(config) {
     function update_glass(glass) {
         glass.update_color();        
         glass.update();
+        glass.set_snap_value();
     }
 
     _flaskfiller.update = function(model_name) {
@@ -3319,9 +3320,7 @@ const glass = function(canvas, model, SCALE, snap_values) {
     });
   }
 
-
   _glass.draw_at = function (x, y) {
-
     _glass.fill.attr({path: model.bowl_path(SCALE, true, x, y)});
     _glass.bowl_shape.attr({path: model.bowl_path(SCALE, false, x, y)});
     _glass.base_shape.attr({path: model.base_path(SCALE, x, y)});
@@ -3375,6 +3374,7 @@ const glass = function(canvas, model, SCALE, snap_values) {
   }
 
   draw();
+  set_snap_value();
 
   _glass.height = height;
   _glass.width = width;
@@ -3392,8 +3392,6 @@ const glass = function(canvas, model, SCALE, snap_values) {
   _glass.glass_pane = glass_pane;
   _glass.set_snap_value = set_snap_value;
   _glass.get_snap_values = get_snap_values;
-  
-  _glass.set_snap_value();
   
   return _glass;
 };
@@ -4883,7 +4881,7 @@ const table = function(config) {
     return {
       name: "select",
       attributes: {
-        "class": "model_list"
+        "class": "model_list form-control"
       },
       children: [{
         name: "option",
@@ -4909,13 +4907,7 @@ const table = function(config) {
         attributes: {
           "data-list": true
         },
-        children: [
-        {
-          name: "i",
-          attributes: {
-            "class": "fa fa-plus"
-          }
-        }, create_model_option_list(config.models)]
+        children: [create_model_option_list(config.models)]
       }, {
         name: "th",
         attributes: {
@@ -5084,6 +5076,7 @@ const table = function(config) {
 
         };
       } else {
+        attributes["class"] = attributes["class"] + " btn";
         if (action.toggled) {
           attributes["data-toggled"] = true;
         }

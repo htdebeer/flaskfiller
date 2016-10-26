@@ -92,67 +92,22 @@ table {
   border-collapse: collapse;
 }
 
-th[data-list] ol.list {
-  visibility: collapse;
-  z-index: 100;
-  list-style: none;
-  font-weight: lighter;
-  padding-top: 0;
-  margin-top: 0;
-  margin-left: 1ex;
-}
-
-th[data-list]:hover ol.list  {
-  visibility: visible;
-}
-
-th[data-list] ol.list li:hover {
-  background: dimgray;
-  color: white;
-}
-
 
 td {
-  border: 1px solid gray;
+  border: 1px solid lightgray;
   text-align: right;
   padding: 0.5ex;
   font-size: inherit;
 }
 
 th {
-  border: 1px solid gray;
-  padding-left: 0.5ex;
-  padding-right: 0.5ex;
+  border: 1px solid lightgray;
+  text-align: center;
 }
 
 th.corner {
   border: none;
   background: none;
-}
-
-tr.main_head {
-  font-style: italic;
-}
-
-tr.main_head th {
-  background: gray;
-  color: white;
-}
-
-tr.sub_head {
-}
-
-td.color {
-}
-
-
-tfoot th select {
-  padding: 0.25ex;
-  margin: 0.25ex;
-  border: 1px solid white;
-  font-family: inherit;
-  font-size: inherit;
-  text-align: right;
 }
 
 input {
@@ -171,14 +126,8 @@ input {
   color: white;
 }
 
-select {
-  padding-right: 1ex;
-}
-
 span.unit {
   font-size: smaller;
-  padding-left: 1ex;
-  padding-right: 1ex;
 }
 
 input[type='range'] {
@@ -187,6 +136,9 @@ input[type='range'] {
   max-height: 1px;
 }
 
+.btn.action {
+  font-size: smaller;
+}
 
 button[data-action='remove'] { 
   background: crimson;

@@ -164,9 +164,7 @@ const glass = function(canvas, model, SCALE, snap_values) {
     });
   }
 
-
   _glass.draw_at = function (x, y) {
-
     _glass.fill.attr({path: model.bowl_path(SCALE, true, x, y)});
     _glass.bowl_shape.attr({path: model.bowl_path(SCALE, false, x, y)});
     _glass.base_shape.attr({path: model.base_path(SCALE, x, y)});
@@ -237,8 +235,6 @@ const glass = function(canvas, model, SCALE, snap_values) {
   _glass.glass_pane = glass_pane;
   _glass.set_snap_value = set_snap_value;
   _glass.get_snap_values = get_snap_values;
-  
-  _glass.set_snap_value();
   
   return _glass;
 };
