@@ -1,15 +1,6 @@
----
-title: FlaskFiller—Educational Software to Explore Instantaneous Speed
-author: Huub de Beer
-keywords:
-- mathematics education
-- primary education
-- instantaneous speed
-- speed
-- calculus
-...
+# FlaskFiller—Educational Software to Explore Instantaneous Speed
 
-# Introcuction
+## Introcuction
 
 FlaskFiller is a learning tool to explore instantaneous speed in primary
 school. It has been made as part of a [research on teaching instantaneous
@@ -20,12 +11,12 @@ a more polished version of FlaskFiller has been developed. You can download
 and use this latest and greatest version of FlaskFiller
 [here](standalone_flaskfiller.html)!
 
-# Using FlaskFiller
+## Using FlaskFiller
 
 [![Figure 1. Using FlaskFiller to explore filling a cocktail glass and a beer
 glass.](flaskfiller.png)](standalone_flaskfiller.html)
 
-## Getting FlaskFiller
+### Getting FlaskFiller
 
 The easiest way to use FlaskFiller is to [open](standalone_flaskfiller.html)
 it in your web browser. You then can save FlaskFiller to a folder on your
@@ -42,7 +33,7 @@ source code and adapt it to your liking. See [the section on adapting
 FlaskFiller](#adapting-flaskfiller) for more information on creating your own
 FlaskFiller.
 
-## Exploring filling glassware with FlaskFiller
+### Exploring filling glassware with FlaskFiller
 
 FlaskFiller consists of four configurable components (see Figure 1) that
 interact with each other:
@@ -103,7 +94,7 @@ too small, the graph component will be shown below the simulation instead of
 alongside it. If you change the browser window's size, reload the page to have
 it resize properly.
 
-## Configuring FlaskFiller
+### Configuring FlaskFiller
 
 FlaskFiller is highly configurable. Settings are stored in the web browser.
 When you open FlaskFiller again in the same web browser, it will use the same
@@ -165,9 +156,9 @@ Open the Settings tab to configure the following aspects of FlaskFiller:
 When FlaskFiller needs to be reloaded for the changes to take effect, you will
 see a message on top of the settings tab.
 
-# Adapting FlaskFiller
+## Adapting FlaskFiller
 
-## FlaskFiller is free software
+### FlaskFiller is free software
 
 FlaskFiller is [free
 software](https://www.gnu.org/philosophy/free-sw.en.html); FlaskFiller is
@@ -188,7 +179,7 @@ libraries:
     [jQuery](https://blog.jquery.com/)
 -   The icons used are from [Font Awesome](http://fontawesome.io/)
 
-# Adapting FlaskFiller to suit your needs
+## Adapting FlaskFiller to suit your needs
 
 You can download FlaskFiller's [source repository](https://github.com/htdebeer/flaskfiller)
 by cloning it to your hard drive and install it as follows (on an UNIX-like operating system):
