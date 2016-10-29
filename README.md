@@ -9,7 +9,7 @@ teaching experiments have been performed and in each experiment used a new
 version of the software has been developed and used. After the last experiment
 a more polished version of FlaskFiller has been developed. You can download
 and use this latest and greatest version of FlaskFiller
-[here](standalone_flaskfiller.html)!
+[here](https://heerdebeer.org/Software/flaskfiller/standalone_flaskfiller.html)!
 
 ## Using FlaskFiller
 
@@ -18,11 +18,13 @@ glass.](flaskfiller.png)](standalone_flaskfiller.html)
 
 ### Getting FlaskFiller
 
-The easiest way to use FlaskFiller is to [open](standalone_flaskfiller.html)
+The easiest way to use FlaskFiller is to
+[open](https://heerdebeer.org/Software/flaskfiller/standalone_flaskfiller.html)
 it in your web browser. You then can save FlaskFiller to a folder on your
 computer and use it without an internet connection, send it to others by
 email, putting it on your own website, and so on. All you need to use
-FlaskFiller is a [FlaskFiller HTML file](standalone_flaskfiller.html) and a
+FlaskFiller is a [FlaskFiller HTML
+file](https://heerdebeer.org/Software/flaskfiller/standalone_flaskfiller.html) and a
 modern web browser, such as
 [Firefox](https://www.mozilla.org/en-US/firefox/new/) or
 [Chromium](https://www.chromium.org/).
