@@ -439,36 +439,94 @@ along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
           educational design projects it was developed in 
         -->
         <div class="tab-pane" id="information" role="tabpanel">
-          <h1 id="flessenvuller">Flessenvuller</h1>
-          <p>FlessenVuller is gemaakt als onderdeel van een <a href="https://heerdebeer.org/DR/">onderzoek naar het onderwijzen van momentane snelheid in groep 7 van de basisschool</a>. Tijdens dat onderzoek zijn een viertal onderwijsexperimenten uitgevoerd, steeds met een verbeterde versie van de Flessenvuller software. De versie die je nu ziet, is de laatste versie.</p>
-          <h2 id="software">Software</h2>
-          <p>De Flessenvuller software is zogenaamde <a href="https://www.gnu.org/philosophy/free-sw.en.html">vrije software</a> vrijgegeven onder de <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPL versie 3 softwarelicentie</a>. Dit houdt in dat je het mag gebruiken, aanpassen, en verspreiden zolang die aanpassingen ook onder deze licentie vallen.</p>
-          <p>Flessenvuller is gemaakt met behulp van de volgende stukken software en bibliotheken:</p>
-          <ul>
-            <li><a href="http://dmitrybaranovskiy.github.io/raphael/">Raphaël.js</a> voor de simulatie</li>
-            <li><a href="https://d3js.org/">d3</a> voor de grafiek</li>
-            <li><a href="https://v4-alpha.getbootstrap.com/">Bootstrap</a> en <a href="https://blog.jquery.com/">jQuery</a> voor het menu, tabs, en instellingenpagina</li>
-            <li><a href="http://fontawesome.io/">Font awesome</a> voor de iconen</li>
-            <li><a href="http://browserify.org/">Browserify</a> om alles aaneen te knopen</li>
-            <li>en <a href="http://pandoc.org/">pandoc</a> om de standalone versie te genereren</li>
-          </ul>
-          <p>Je kunt de FlessenVuller software downloaden van <a
-              href="https://heerdebeer.org/Software/flessenvuller/">heerdebeer.org/Software/flessenvuller/</a>.</p>
+<p>FlessenVuller is een leergereedschap om momentane snelheid te onderzoeken op de basisschool. Het is gemaakt als onderdeel van een onderzoek naar <a href="https://heerdebeer.org/DR/">het onderwijzen van momentane snelheid in groep 7</a>. Tijdens dit onderzoek zijn er een viertal onderwijsexperimenten uitgevoerd. In elk onderwijsexperiment werd een verbeterde versie van FlessenVuller gebruikt. Na het laatste experiment is een meer afgewerkte versie gemaakt. Je kunt deze laatste versie <a href="standalone_flessenvuller.html">hier</a> downloaden en gebruiken!</p>
+<h2 id="flessenvuller-is-free-software">FlessenVuller is free software</h2>
+<p>FlessenVuller is <a href="https://www.gnu.org/philosophy/free-sw.en.html">free software</a> en wordt vrijgegeven onder de <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPL versie 3</a>. Dit houdt in dat je de software mag aanpassen, gebruiken, en verspreiden zolang je eventuele aanpassingen onder dezelfde licentie vrijgeeft. De FlessenVuller broncode is gepubliceerd op <a href="https://github.com/htdebeer/flaskfiller">github</a>.</p>
+<p>FlessenVuller maakt gebruik van de volgende bibliotheken:</p>
+<ul>
+<li>De simulatiecomponent is gemaakt met behulp van <a href="http://dmitrybaranovskiy.github.io/raphael/">Raphaël.js</a></li>
+<li>De grafiekcomponent met <a href="https://d3js.org/">d3</a></li>
+<li>De gebruikersinterface met <a href="https://v4-alpha.getbootstrap.com/">Bootstrap</a> en <a href="https://blog.jquery.com/">jQuery</a></li>
+<li>De icoontjes zijn van <a href="http://fontawesome.io/">Font Awesome</a></li>
+</ul>
+<h1 id="pas-flessenvuller-aan-aan-jouw-situatie">Pas FlessenVuller aan aan jouw situatie</h1>
+<p>De broncode van FlessenVuller kan gedownload worden van de <a href="https://github.com/htdebeer/flaskfiller">broncode repository</a>. Je kunt de broncode klonen op je computer. Je doet dit op een unix-achtig besturingssysteem als volgt:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> clone https://github.com/htdebeer/flaskfiller.git
+<span class="kw">cd</span> flaskfiller
+<span class="kw">npm</span> install</code></pre></div>
+<p>Als je de JavaScript broncode aanpast, gebruik dan <code>npm run build</code> om een nieuwe versie can de basisbibliotheek van FlessenVuller te genereren.</p>
+<p>Om een standalone versie van FlessenVuller of een aangepaste versie te maken, is een <a href="https://www.gnu.org/software/bash/">Bash</a> script bijgevoegd: <code>create_standalone.sh</code>. Dit script maakt gebruik van <a href="http://pandoc.org">Pandoc</a> om een standalone versie te genereren waarin alle assets zijn ingevoegd.</p>
         </div>
         <!-- 
-          Help on using flaskfiller
+        Help on using flaskfiller
         -->
         <div class="tab-pane" id="help" role="tabpanel">
-          <p>
-            Hoe Flessenvuller te gebruiken:
-          </p>
+          <h1 id="flessenvuller-gebruiken">FlessenVuller gebruiken</h1>
+          <p><a href="standalone_flessenvuller.html"><img src="flaskfiller.png" alt="Figuur 1. Gebruik FlessenVuller om het vullen van een cocktail- en bierglas te onderzoeken." /></a></p>
+          <h2 id="flessenvuller-downloaden">FlessenVuller downloaden</h2>
+          <p>De eenvoudigste manier om FlessenVuller te gebruiken is om het <a href="standalone_flessenvuller.html">te openen</a> in je webbrowser. Je kunt FlessenVuller vervolgens opslaan op je computer en het zonder internet gebruiken, met anderen delen via email, op je website zetten, enzovoorts. Een moderne webbrowser, zoals <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a> of <a href="https://www.chromium.org/">Chromium</a>, en het <a href="standalone_flessenvuller.html">FlessenVuller HTML bestand</a> is alles dat je nodig hebt om FlessenVuller te gebruiken.</p>
+          <p>Omdat FlessenVuller <a href="https://www.gnu.org/philosophy/free-sw.en.html">free software</a> is kun je de broncode downloaden en aanpassen voor jouw situatie. Zie hiervoor de <a href="#aanpassen-van-flessenvuller">paragraaf over het aanpassen van FlessenVuller</a>.</p>
+          <h2 id="het-onderzoeken-van-het-vullen-van-glazen-met-behulp-van-flessenvuller">Het onderzoeken van het vullen van glazen met behulp van FlessenVuller</h2>
+          <p>FlessenVuller bestaat uit vier configureerbare en samenhangende onderdelen (zie Figuur 1):</p>
+          <ol style="list-style-type: decimal">
+            <li><p>In Figuur 1 zie je de simulatie van een cocktailglas met een groene vloeistof en een bierglas met een paarse vloeistof. Om de simulatie te starten, dubbelklik je op een glas of je gebruikt de besturing (zie de beschrijving van het laatste component hieronder). Als je vervolgens op het glas klikt, wordt de simulatie gepauzeerd. De simulatie verloopt synchroon met het tekenen van de grafiek en het verlopen van de waarden in de tabel (en vice versa).</p>
+              <p>Je kunt glazen verslepen in de simulatie. Als je een glas over een ander glas sleept, springt het naar de midlijn van dat andere glas. Dit maakt het gemakkelijker om verschillende glazen op elkaar te leggen.</p>
+              <p>Merk overigens op dat de plaats van een glas in de simulatie geen invloed heeft op de andere onderdelen van FlessenVuller. Zoals je in Figuur 1 kunt zien is het bierglas zo'n 2cm verplaatst, maar de grafiek van het bierglas begint nog steeds op 0cm. Dit is welbewust.</p>
+              <p>Als je je muiscursor over een lineaal beweegt, verschijnt er een rood hulplijntje.</p></li>
+            <li><p>In de grafiek zie je een lijngrafiek van het cocktailglas en een staafdiagram van het bierglas. FlessenVuller heeft nog een derde type grafiek: de pijlgrafiek. Je kunt de pijlgrafiek activeren middels het instellingentabblad. (Het instellingentabblad wordt in de volgende paragraaf besproken)</p>
+              <p>In Figuur 1 hangt de muiscursor boven de lijngrafiek van het cocktailglas op het punt (1.31s, 12.19cm). Je kunt FlessenVuller configureren om verschillende aspecten van de door de grafiek beschreven situatie in een punt te laten zien. Daarnaast kun je kiezen welke grootheden op de assen tegen elkaar uit te zetten. FlessenVuller kent de grootheden hoogte, tijd, volume en stijgsnelheid.</p></li>
+            <li><p>Onderaan zie je de besturingscomponent tezamen met de tabel (die later wordt beschreven). Met behulp can de besturing kun je de simualtie starten, pauzeren, stoppen en afronden. Je kunt ook de verschillende typen grafieken verbergen of tevoorschijn laten komen en de stapgrootte van de stappen tussen opeenvolgende staafjes of pijltjes aanpassen. Om de kleur van de vloeistof in een glas te veranderen, klik je op het vierkantje met die kleur.</p>
+              <p>Via de besturingscomponent kun je ook een glas toevoegen of verwijderen. Merk op dat een uitrekbaar longdrinkglas toegevoegd kan worden. Dit is het enige glas dat meerdere keren toegevoegd kan worden. Dit glas is te meer bijzonder omdat je de grootte ervan kunt aanpassen door het handvat in de rechterbovenhoek te verslepen.</p></li>
+            <li><p>Tot slot kun je de situatie kwantitatief laten beschrijven met behulp van de tabel. De tabel is gecombineerd met de besturing. Je kunt configureren welke grootheden je in de tabel wilt zien. De waarden van deze grootheden kun je aanpassen. Zo kun je bijvoorbeeld het volume in het cocktail glas veranderen naar 100ml. Druk je op Enter, dan wordt deze verandering doorgevoerd in alle onderdelen van FlessenVuller.</p></li>
+          </ol>
+          <p>Elke component, behalve de besturing, kan verborgen worden. Als het webbrowservenster te smal is, dan wordt de grafiek onder de simulatie geplaatst. Pas je de grootte van het webbrowservenster aan dien je de pagina te herladen om FlessenVuller van de nieuwe grootte gebruik te laten maken.</p>
+          <h2 id="instellen-van-flessenvuller">Instellen van FlessenVuller</h2>
+          <p>FlessenVuller is zeer configureerbaar. De instellingen worden in de webbrowser opgeslagen. Als je FlessenVuller opnieuw opent in dezelfde webbrowser dan worden de instellingen van het laatste gebruik geladen.</p>
+          <p>Open het instellingentabblad om de volgende aspecten van FlessenVuller in te stellen:</p>
+          <ul>
+            <li><p><strong>Algemeen</strong>: kies welke onderdelen van FlessenVuller worden getoond of verborgen. Standaard worden de <strong>simulatie</strong>, <strong>grafiek</strong>, <strong>tabel</strong> en <strong>besturing</strong> getoond. Je kunt de <strong>besturing</strong> niet verbergen.</p></li>
+            <li><p><strong>Simulatie</strong>: kies de <em>hoogte van de gesimuleerde wereld</em>. Na het aanpassen van de hoogte moet FlessenVuller opnieuwe geladen worden om de verandering door te voeren.</p></li>
+            <li><p><strong>Grafiek</strong>:</p>
+              <ul>
+                <li>Selecteer de <em>grootheid van de horizontale as</em>. Kies een van hoogte, tijd, volume of stijgsnelheid.</li>
+                <li>Selecteer de <em>grootheid van de verticale as</em>. Kies een van hoogte, tijd, volume of stijgsnelheid. Merk op dat je dezelfde grootheid voor beide assen kunt selecteren. Dit kan een interessant onderwerp voor een discussie zijn.</li>
+                <li><p>Selecteer welke <em>grafiektypen</em> getoond kunnen worden. Deze typen zijn:</p>
+                  <ul>
+                    <li><em>lijngrafiek</em></li>
+                    <li><em>staafdiagram</em></li>
+                    <li><em>pijldiagram</em></li>
+                </ul></li>
+              </ul>
+              <p>Je kunt een grafiek van een bepaald glas verbergen of tonen door het bijbehorende icoontje in de besturing te activeren.</p>
+              <ul>
+                <li><p><em>Opties</em>:</p>
+                  <ul>
+                    <li><em>Toon de coordinaten</em> van het punt op een lijngrafiek waar de muiscursor wijst.</li>
+                    <li><em>Toon de stijgsnelheid</em> in het punt op een lijngrafiek waar de muiscursor wijst.</li>
+                    <li><em>Toon de raaklijn</em> aan het punt op een lijngrafiek waar de muiscursor wijst.</li>
+                    <li><em>Laat een stapgrootte schuif</em> zien om de afstand tussen opeenvolgende staafjes of pijlen te veranderen.</li>
+                    <li><em>Maak de lijngrafieken van de uitrekbare longdrinkglaasjes verplaatsbaar</em>. Dit stelt je in staat om deze lijngrafieken over andere grafieken te slepen om zo het idee van een raaklijn te onderzoeken.</li>
+                </ul></li>
+            </ul></li>
+            <li><p><strong>Tabel</strong>: selecteer welke grootheden getoond worden. Je kunt de grootheden hoogte, tijd, volume en stijgsnelheid tonen.</p></li>
+            <li><p><strong>Besturing</strong>: selecteer welke glazen aan FlessenVuller toegevoegd kunnen worden. Je kunt uit de volgende glazen kiezen:</p>
+              <ul>
+                <li><em>cocktailglas</em>. Dit wordt standaard getoond als het aangevinkt is</li>
+                <li><em>longdrinkglas</em></li>
+                <li><em>uitrekbaar longdrinkglas</em>. Dit kan meerdere keren toegevoegd worden</li>
+                <li><em>wijnglas</em></li>
+                <li><em>cognacglas</em></li>
+                <li><em>bierglas</em>.</li>
+            </ul></li>
+          </ul>
+          <p>Als FlessenVuller opnieuw opgestart moet worden om de veranderingen door te voeren, wordt een bericht getoond bovenaan het instellingentabblad.</p>
         </div>
       </div>
     </main>
     <script src="node_modules/jquery/dist/jquery.min.js"><!--</script>
     <script>
       // surpress Bootstrap warning about missing Tether: is not used in FlaskFiller anyway
-      window.Tether = function () {};
+            window.Tether = function () {};
     </script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="node_modules/raphael/raphael.min.js"></script>
