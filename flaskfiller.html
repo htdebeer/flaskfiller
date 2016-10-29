@@ -440,58 +440,83 @@ along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
           educational design projects it was developed in 
         -->
         <div class="tab-pane" id="information" role="tabpanel">
-          <h1>FlaskFiller</h1>
-          
-          <p>FlaskFiller is made as part of a <a
-              href="https://heerdebeer.org/DR/">research on teaching
-              instantaneous speed in 5th grade</a>. During that research, four
-            teaching experiments have been performed, each time with an
-            improved version of the FlaskFiller software. The version you are
-            working with now is the latest incarnation.</p>
-          <h2>Software</h2>
-
-          <p>FlaskFiller is <a
-              href="https://www.gnu.org/philosophy/free-sw.en.html">free
-              software</a> and is released under the <a
-              href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPL version 3
-              license</a>. This means you can use, adapt, and distribute
-            FlaskFiller as long as these adaptations are also published under
-            the same license.</p>
-
-          <p>FlaskFiller is made using the following libraries and
-            programs:</p>
-          <ul>
-            <li><a
-                href="http://dmitrybaranovskiy.github.io/raphael/">Raphaël.js</a>
-            for the simulation component</li>
-            <li><a href="https://d3js.org/">d3</a> for the graph component</li>
-            <li><a href="https://v4-alpha.getbootstrap.com/">Bootstrap</a> and
-              <a href="https://blog.jquery.com/">jQuery</a> for the menu,
-              tabs, and settings page</li>
-            <li><a href="http://fontawesome.io/">Font awesome</a> for the
-              icons</li>
-            <li><a href="http://browserify.org/">Browserify</a> to create the
-            FlaskFiller javascript library</li>
-            <li>and <a href="http://pandoc.org/">pandoc</a> to generate the
-              standalone verion</li>
-          </ul>
-          <p>You can download FlaskFiller from <a
-              href="https://heerdebeer.org/Software/flaskfiller/">heerdebeer.org/Software/flaskfiller/</a>.</p>
+<p>FlaskFiller is a learning tool to explore instantaneous speed in primary school. It has been made as part of a <a href="https://heerdebeer.org/DR/">research on teaching instantaneous speed in grade 5</a>. During this research, four teaching experiments have been performed and in each experiment used a new version of the software has been developed and used. After the last experiment a more polished version of FlaskFiller has been developed. You can download and use this latest and greatest version of FlaskFiller <a href="standalone_flaskfiller.html">here</a>!</p>
+<h2 id="flaskfiller-is-free-software">FlaskFiller is free software</h2>
+<p>FlaskFiller is <a href="https://www.gnu.org/philosophy/free-sw.en.html">free software</a>; FlaskFiller is released under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPL version 3</a>. This means that you can use, adapt, and distribute FlaskFiller as long as these adaptations are published under the same free license. The FlaskFiller source code is released on <a href="https://github.com/htdebeer/flaskfiller">github</a>.</p>
+<p>Furthermore, FlaskFiller is build using the following free and/or open source libraries:</p>
+<ul>
+<li>The simulation component is build with <a href="http://dmitrybaranovskiy.github.io/raphael/">Raphaël.js</a></li>
+<li>The graphing component is build with <a href="https://d3js.org/">d3</a></li>
+<li>The user interface is made with <a href="https://v4-alpha.getbootstrap.com/">Bootstrap</a> and <a href="https://blog.jquery.com/">jQuery</a></li>
+<li>The icons used are from <a href="http://fontawesome.io/">Font Awesome</a></li>
+</ul>
         </div>
         <!-- 
           Help on using flaskfiller
         -->
         <div class="tab-pane" id="help" role="tabpanel">
-          <p>
-            How to use FlaskFiller
-          </p>
+          <h1 id="using-flaskfiller">Using FlaskFiller</h1>
+          <h2 id="exploring-filling-glassware-with-flaskfiller">Exploring filling glassware with FlaskFiller</h2>
+          <p>FlaskFiller consists of four configurable components (see Figure 1) that interact with each other:</p>
+          <ol style="list-style-type: decimal">
+            <li><p>In Figure 1, you see the simulation of filling a cocktail glass with a greenish liquid and a beer glass with a purple liquid. To start the simulation of filling a glass, double-click on a glass or use the control (see the last component). Clicking on a glass that is being filled, pauses the simulation. Changes in the simulation are reflected in the other three components (and vice versa).</p>
+              <p>You can drag glasses around in the simulation. When you drag a glass over another glass, it snaps to that other glass' center line. This makes it easier to align different glasses.</p>
+              <p>Do note that the glass' position in the simulation has no effect on the other components. As you can see in Figure 1, the beer glass have been moved about 2cm, yet its graph still starts at 0cm. This is intentional.</p>
+              <p>When you move your mouse pointer over a ruler, a red helper line will show.</p></li>
+            <li><p>In the graph component you see a line graph of the cocktail glass and a bar chart of the beer glass. FlaskFiller also has a third type of graph, the arrow graph. You can enable the arrow chart via the settings tab (which is discussed in the <a href="#configuring-flaskfiller">next section: Configuring FlaskFiller</a>) to explore what it does.</p>
+              <p>In Figure 1 the mouse cursor hovers over the cocktail glass' line graph at the point (1.31s, 12.19cm). You can configure FlaskFiller to show different aspects of the situation described by a point on a line graph. Furthermore, you can choose which quantities to plot on the axes. FlaskFiller supports quantities time, height, volume, and the rising speed.</p></li>
+            <li><p>On the bottom you see the control component combined with the table (more about that later). Using the control you can start, pause, restart or finish the simulation. You can also show or hide graphs, change the step-size of a bar chart and arrow graph. To change the color of a glass' liquid, you click on its colored square. A random color will be chosen.</p>
+              <p>Furthermore, through the control component you can add and remove a glass. Note the option to add an extensible highball glass. The extensible highball glass is the only glass that can be added multiple times. And you can change its size by dragging its handle at the upper-right corner of the glass.</p></li>
+            <li><p>Finally, the situation of filling glassware is described quantitatively by a table. The table component is combined with the control component. You can configure what quantities to show in the table component, if any. Furthermore, the values in the quantities' columns can be edited. For example, if you would change the cocktail glass' volume to 100ml and press Enter, the table, simulation, and graph components will be updated to reflect that change.</p></li>
+          </ol>
+          <p>Each component but the control can be hidden. If your web browser window is too small, the graph component will be shown below the simulation instead of alongside it. If you change the browser window's size, reload the page to have it resize properly.</p>
+          <h2 id="configuring-flaskfiller">Configuring FlaskFiller</h2>
+          <p>FlaskFiller is highly configurable. Settings are stored in the web browser. When you open FlaskFiller again in the same web browser, it will use the same settings as you had when you had last time you used FlaskFiller.</p>
+          <p>Open the Settings tab to configure the following aspects of FlaskFiller:</p>
+          <ul>
+            <li><p><strong>General</strong>: select which components you want to show in FlaskFiller. By default the <em>simulation</em>, <em>graph</em>, <em>table</em>, and <em>control</em> components are selected. You cannot deselect the <em>control</em> component.</p></li>
+            <li><p><strong>Simulation</strong>: change the <em>height of the simulated world</em>. After changing the <em>height</em>, the FlaskFiller application needs to be reloaded.</p></li>
+            <li><p><strong>Graph</strong>:</p>
+              <ul>
+                <li>Select the <em>horizontal axis' quantity</em>, which is one of height, time, volume, or rising speed.</li>
+                <li>Select the <em>vertical axis' quantity</em>, which is one of height, time, volume, or rising speed. Note that you can select the same quantity for both axes, which can make for an interesting topic of discussion.</li>
+                <li><p>Select which <em>graph types</em> can be shown. The supported graph types are:</p>
+                  <ul>
+                    <li><em>line graph</em></li>
+                    <li><em>bar graph</em></li>
+                    <li><em>arrow graph</em></li>
+                </ul></li>
+              </ul>
+              <p>You can show or hide a graph of a particular glass by toggling its corresponding icon in the control component.</p>
+              <ul>
+                <li><p>Various <em>options</em>:</p>
+                  <ul>
+                    <li><em>Show the coordinates</em> of the point on a line graph the mouse points at.</li>
+                    <li><em>Show the rising speed</em> in the point on a line graph the mouse points at.</li>
+                    <li><em>Show the tangent line</em> to the point on a line graph the mouse points at.</li>
+                    <li><em>Show a slider to change the step-size</em> between the subsequent bars in a bar graph or the arrows in an arrow graph.</li>
+                    <li><em>Make the line graphs of the extensible highball glass moveable</em>. This allows you to move these line graphs over other graphs to explore the idea of a tangent line.</li>
+                </ul></li>
+            </ul></li>
+            <li><p><strong>Table</strong>: select which quantities to show. You can enable each of <em>height</em>, <em>time</em>, <em>volume</em>, and <em>rising speed</em>.</p></li>
+            <li><p><strong>Control</strong>: select which glasses can be added in FlaskFiller. You can select the following glasses:</p>
+              <ul>
+                <li><em>cocktail glass</em>, which will be shown by default if selected</li>
+                <li><em>highball glass</em></li>
+                <li><em>extensible highball glass</em>, which can be added multiple times</li>
+                <li><em>wine glass</em></li>
+                <li><em>cognac glass</em></li>
+                <li><em>beer glass</em>.</li>
+            </ul></li>
+          </ul>
+          <p>When FlaskFiller needs to be reloaded for the changes to take effect, you will see a message on top of the settings tab.</p>
         </div>
       </div>
     </main>
     <script src="node_modules/jquery/dist/jquery.min.js"><!--</script>
     <script>
       // surpress Bootstrap warning about missing Tether: is not used in FlaskFiller anyway
-      window.Tether = function () {};
+    window.Tether = function () {};
     </script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="node_modules/raphael/raphael.min.js"></script>
