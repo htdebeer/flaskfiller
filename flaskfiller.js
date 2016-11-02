@@ -2370,6 +2370,19 @@ const SETTINGS = [{
   onChange: toggleColumn("stijgsnelheid"),
   reload: true
 },{
+  name: "table.glass.name",
+  selector: "input[name='table-glass-name'][value='hide-glass-name']",
+  type: "checkbox",
+  onChange: function () {
+    const setting = $(this);
+    const nameColumn = $("td.glass-name");
+    if (setting.prop("checked")) {
+      nameColumn.hide();
+    } else {
+      nameColumn.show();
+    }
+  }
+},{
   name: "glasses.cocktail",
   selector: "input[name='glasses'][value='cocktail']",
   type: "checkbox",
@@ -5331,7 +5344,7 @@ const table = function(config) {
           children: [{
             name: "td",
             value: model.name.split("_").join(" "),
-            attributes: { "class": model.name }
+            attributes: { "class": "glass-name " + model.name }
           },{
             name: "td",
             attributes: {

@@ -150,8 +150,14 @@ stellen:
             andere grafieken te slepen om zo het idee van een raaklijn te
             onderzoeken.
 
--   **Tabel**: selecteer welke grootheden getoond worden. Je kunt de
-    grootheden hoogte, tijd, volume en stijgsnelheid tonen.
+-   **Tabel**: 
+
+        -   selecteer welke grootheden getoond worden. Je kunt de grootheden
+            hoogte, tijd, volume en stijgsnelheid tonen.
+
+        -   selecteer of *de naam van een glas verborgen* moet worden. Dit kun
+            je bijvoorbeeld gebruiken om leerlingen, gegeven een
+            stijgsnelheid/tijd grafiek het bijbehorende glas te ontwerpen.
 
 -   **Besturing**: selecteer welke glazen aan FlessenVuller toegevoegd kunnen
     worden. Je kunt uit de volgende glazen kiezen:

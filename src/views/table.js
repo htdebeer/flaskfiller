@@ -305,7 +305,7 @@ const table = function(config) {
           children: [{
             name: "td",
             value: model.name.split("_").join(" "),
-            attributes: { "class": model.name }
+            attributes: { "class": "glass-name " + model.name }
           },{
             name: "td",
             attributes: {

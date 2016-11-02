@@ -149,8 +149,14 @@ Open the Settings tab to configure the following aspects of FlaskFiller:
             This allows you to move these line graphs over other graphs to
             explore the idea of a tangent line.
 
--   **Table**: select which quantities to show. You can enable each of
-    *height*, *time*, *volume*, and *rising speed*.
+-   **Table**: 
+
+    -   select which quantities to show. You can enable each of *height*,
+        *time*, *volume*, and *rising speed*.
+
+    -   select if a *glass's name should be hidden*. You can use this for
+        example to show a risingspeed/time graph and have students design the
+        glass belonging to that glass.
 
 -   **Control**: select which glasses can be added in FlaskFiller. You can
     select the following glasses:
