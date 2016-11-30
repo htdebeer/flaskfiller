@@ -13,5 +13,5 @@
     "browser": true,
     "devel": true,
     "module": true,
-    "predef": ["Raphael", "d3", "module", "require", "$"]
+    "predef": ["Raphael", "d3", "module", "require", "$", "I18N"]
 }

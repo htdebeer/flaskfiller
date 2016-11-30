@@ -38,7 +38,7 @@ const actions = function() {
     name: "start",
     group: "run_model",
     icon: "fa-play",
-    tooltip: "Start simulation",
+    tooltip: I18N.start_simulation,
     enabled: true,
     callback: function(model) {
 
@@ -71,7 +71,7 @@ const actions = function() {
     name: "pause",
     group: "run_model",
     icon: "fa-pause",
-    tooltip: "Pause simulation",
+    tooltip: I18N.pause_simulation,
     enabled: false,
     callback: function(model) {
       return function() {
@@ -90,7 +90,7 @@ const actions = function() {
     name: "reset",
     group: "run_model",
     icon: "fa-fast-backward",
-    tooltip: "Reset simulation",
+    tooltip: I18N.reset_simulation,
     enabled: true,
     callback: function(model) {
       return function() {
@@ -112,7 +112,7 @@ const actions = function() {
     name: "finish",
     group: "run_model",
     icon: "fa-fast-forward",
-    tooltip: "Finish simulation",
+    tooltip: I18N.finish_simulation,
     enabled: true,
     callback: function(model) {
       return function() {
@@ -136,7 +136,7 @@ const actions = function() {
     name: "toggle_line",
     group: "toggle_view",
     icon: "fa-line-chart",
-    tooltip: "Show/hide the line graph of this model",
+    tooltip: I18N.show_line_graph,
     enabled: true,
     toggled: false,
     callback: function(model) {
@@ -156,7 +156,7 @@ const actions = function() {
     name: "toggle_arrows",
     group: "toggle_view",
     icon: "fa-long-arrow-right",
-    tooltip: "Show/hide the arrows graph of this model",
+    tooltip: I18N.show_arrow_graph,
     enabled: true,
     toggled: false,
     callback: function(model) {
@@ -176,7 +176,7 @@ const actions = function() {
     name: "toggle_tailpoints",
     group: "toggle_view",
     icon: "fa-bar-chart",
-    tooltip: "Show/hide the tailpoints graph of this model",
+    tooltip: I18N.show_bar_graph,
     enabled: true,
     toggled: false,
     callback: function(model) {
@@ -196,7 +196,7 @@ const actions = function() {
   _actions.step_size = {
     name: "step_size",
     group: "step_size",
-    tooltip: "Set the step size of the tailpoint graph",
+    tooltip: I18N.set_step_size,
     enabled: true,
     type: "slider",
     callback: function(model) {

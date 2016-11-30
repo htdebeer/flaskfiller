@@ -39,7 +39,7 @@ const actions = function() {
     name: "start",
     group: "run_model",
     icon: "fa-play",
-    tooltip: "Start simulation",
+    tooltip: I18N.start_simulation,
     enabled: true,
     callback: function(model) {
 
@@ -72,7 +72,7 @@ const actions = function() {
     name: "pause",
     group: "run_model",
     icon: "fa-pause",
-    tooltip: "Pause simulation",
+    tooltip: I18N.pause_simulation,
     enabled: false,
     callback: function(model) {
       return function() {
@@ -91,7 +91,7 @@ const actions = function() {
     name: "reset",
     group: "run_model",
     icon: "fa-fast-backward",
-    tooltip: "Reset simulation",
+    tooltip: I18N.reset_simulation,
     enabled: true,
     callback: function(model) {
       return function() {
@@ -113,7 +113,7 @@ const actions = function() {
     name: "finish",
     group: "run_model",
     icon: "fa-fast-forward",
-    tooltip: "Finish simulation",
+    tooltip: I18N.finish_simulation,
     enabled: true,
     callback: function(model) {
       return function() {
@@ -137,7 +137,7 @@ const actions = function() {
     name: "toggle_line",
     group: "toggle_view",
     icon: "fa-line-chart",
-    tooltip: "Show/hide the line graph of this model",
+    tooltip: I18N.show_line_graph,
     enabled: true,
     toggled: false,
     callback: function(model) {
@@ -157,7 +157,7 @@ const actions = function() {
     name: "toggle_arrows",
     group: "toggle_view",
     icon: "fa-long-arrow-right",
-    tooltip: "Show/hide the arrows graph of this model",
+    tooltip: I18N.show_arrow_graph,
     enabled: true,
     toggled: false,
     callback: function(model) {
@@ -177,7 +177,7 @@ const actions = function() {
     name: "toggle_tailpoints",
     group: "toggle_view",
     icon: "fa-bar-chart",
-    tooltip: "Show/hide the tailpoints graph of this model",
+    tooltip: I18N.show_bar_graph,
     enabled: true,
     toggled: false,
     callback: function(model) {
@@ -197,7 +197,7 @@ const actions = function() {
   _actions.step_size = {
     name: "step_size",
     group: "step_size",
-    tooltip: "Set the step size of the tailpoint graph",
+    tooltip: I18N.set_step_size,
     enabled: true,
     type: "slider",
     callback: function(model) {
@@ -557,7 +557,105 @@ const flaskfiller = function flaskfiller(config) {
 
 module.exports = flaskfiller;
 
-},{"./models/glass":4,"./models/longdrink_glass":5,"./predefined_glasses":8,"./views/flaskfiller/flaskfiller":11,"./views/flaskfiller/glass_grafter":13,"./views/graph":16,"./views/table":17}],4:[function(require,module,exports){
+},{"./models/glass":6,"./models/longdrink_glass":7,"./predefined_glasses":10,"./views/flaskfiller/flaskfiller":13,"./views/flaskfiller/glass_grafter":15,"./views/graph":18,"./views/table":19}],4:[function(require,module,exports){
+/*
+ * Copyright 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
+ *
+ * This file is part of FlaskFiller.
+ *
+ * FlaskFiller is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * FlaskFiller is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
+ */
+module.exports = {
+  height: "height",
+  volume: "volume",
+  time: "time",
+  speed: "rising speed",
+
+  highball_glass: "highball glass",
+  cocktail_glass: "cocktail glass",
+  wine_glass: "wine glass",
+  cognac_glass: "cognac glass",
+  beer_glass: "beer glass",
+  extensible_highball_glass: "extensible highball glass",
+  highball: "highball",
+
+  start: "start",
+  start_simulation: "Start simulation",
+  finish: "finish",
+  pause: "pause",
+  reset: "reset",
+  pause_simulation: "Pause simulation.",
+  reset_simulation: "Reset simulation.",
+  finish_simulation: "Finish simulation.",
+
+  show_line_graph: "Show/hide line graph.",
+  show_arrow_graph: "Show/hide arrow graph.",
+  show_bar_graph: "Show/hide bar graph.",
+  set_step_size: "Set the step size.",
+  
+};
+
+},{}],5:[function(require,module,exports){
+/*
+ * Copyright 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
+ *
+ * This file is part of FlaskFiller.
+ *
+ * FlaskFiller is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * FlaskFiller is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
+ */
+module.exports = {
+  height: "hoogte",
+  volume: "volume",
+  time: "tijd",
+  speed: "stijgsnelheid",
+
+  highball_glass: "longdrinkglas",
+  cocktail_glass: "cocktailglas",
+  wine_glass: "wijnglas",
+  cognac_glass: "cognacglas",
+  beer_glass: "bierglas",
+  extensible_highball_glass: "uitrekbaar longdrinkglas",
+  highball: "longdrinkg",
+
+  start: "start",
+  start_simulation: "Start simulatie.",
+  finish: "finish",
+  pause: "pauzeer",
+  reset: "reset",
+  pause_simulation: "Simulatie pauzeren.",
+  reset_simulation: "Simulatie herbeginnen.",
+  finish_simulation: "Simulatie beëindingen.",
+
+  show_line_graph: "Laat de lijngrafiek zien of verberg de lijngrafiek.",
+  show_arrow_graph: "Laat de pijlgrafiek zien of verberg de pijlgrafiek.",
+  show_bar_graph: "Laat de staafgrafiek zien of verberg de staafgrafiek.",
+  set_step_size: "Stel de stapgrootte in.",
+  
+};
+
+},{}],6:[function(require,module,exports){
 /*
  * Copyright 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
  *
@@ -822,7 +920,7 @@ const glass = function(name, config) {
 
 module.exports = glass;
 
-},{"../actions":1,"../path":7,"./model.js":6}],5:[function(require,module,exports){
+},{"../actions":1,"../path":9,"./model.js":8}],7:[function(require,module,exports){
 /*
  * Copyright 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
  *
@@ -1052,7 +1150,7 @@ const longdrink_glass = function(name, config) {
 
 module.exports = longdrink_glass;
 
-},{"../actions":1,"./model":6}],6:[function(require,module,exports){
+},{"../actions":1,"./model":8}],8:[function(require,module,exports){
 /*
  * Copyright 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
  *
@@ -1652,7 +1750,7 @@ const model = function(name, config) {
 
 module.exports = model;
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /*
  * Copyright 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
  *
@@ -1827,7 +1925,7 @@ module.exports = {
   scale_shape: scale_shape
 };
 
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /*
  * Copyright 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
  *
@@ -2108,7 +2206,7 @@ module.exports = function(name, flow_rate) {
   });
 };
 
-},{"./models/glass":4}],9:[function(require,module,exports){
+},{"./models/glass":6}],11:[function(require,module,exports){
 /*
  * Copyright 2016 Huub de Beer <Huub@heerdebeer.org>
  *
@@ -2129,32 +2227,40 @@ module.exports = function(name, flow_rate) {
  */
 const flaskfiller = require("./flaskfiller.js");
 
+// Get translations
+const LANGUAGES = {
+  "en": require("./i18n/en.js"),
+  "nl": require("./i18n/nl.js")
+};
+
+window.I18N = LANGUAGES[document.documentElement.lang || "en"];
+
 const models = [
 {
-  name: "longdrinkglas",
+  name: "highball_glass",
   type: "predefined",
   register: false
 }, {
-  name: "cocktailglas",
+  name: "cocktail_glass",
   type: "predefined",
   register: true
 }, {
-  name: "wijnglas",
+  name: "wine_glass",
   type: "predefined",
   register: false
 }, {
-  name: "cognacglas",
+  name: "cognac_glasS",
   type: "predefined",
   register: false
 }, {
-  name: "bierglas",
+  name: "beer_glass",
   type: "predefined",
   register: false
 }, {
-  name: "uitrekbaar_longdrinkglas",
-  prefix: "uitrekbaar_longdrinkglas",
+  name: "extensible_highball_glass",
+  prefix: "extensible",
   extensible: true,
-  type: "longdrink",
+  type: "highball",
   radius: 1.1,
   height: 5.8,
   register: false,
@@ -2348,7 +2454,7 @@ const SETTINGS = [{
   name: "table.quantities.height",
   selector: "input[name='table-quantities'][value='height']",
   type: "checkbox",
-  onChange: toggleColumn("hoogte"),
+  onChange: toggleColumn("height"),
   reload: true
 },{
   name: "table.quantities.volume",
@@ -2360,13 +2466,13 @@ const SETTINGS = [{
   name: "table.quantities.time",
   selector: "input[name='table-quantities'][value='time']",
   type: "checkbox",
-  onChange: toggleColumn("tijd"),
+  onChange: toggleColumn("time"),
   reload: true
 },{
   name: "table.quantities.speed",
   selector: "input[name='table-quantities'][value='speed']",
   type: "checkbox",
-  onChange: toggleColumn("stijgsnelheid"),
+  onChange: toggleColumn("speed"),
   reload: true
 },{
   name: "table.glass.name",
@@ -2518,14 +2624,14 @@ const getGlasses = function () {
 
 const getModels = function (glasses) {
   const nameMap = {
-    "cocktail": "cocktailglas",
-    "highball": "longdrinkglas",
-    "extensible-highball": "uitrekbaar_longdrinkglas",
-    "erlenmeyer": "erlenmeyer",
-    "wine": "wijnglas",
-    "cognac": "cognacglas",
-    "beer": "bierglas",
-    "round-bottom": "rondbodemfles"
+    "cocktail": "cocktail_glass",
+    "highball": "highball_glass",
+    "extensible-highball": "extensible_highball_glass",
+    "erlenmeyer": "erlenmeyer_flask",
+    "wine": "wine_glass",
+    "cognac": "cognac_glass",
+    "beer": "beer_glass",
+    "round-bottom": "round_bottom_flask"
   };
   const findModel = function (glassName) {
     return models.filter(function (model) {
@@ -2637,9 +2743,10 @@ const runFlaskFiller = function () {
 $(document).ready(runFlaskFiller);
 $(window).on("beforeunload", function () {
   saveBeforeUnload();
+  console.log(I18N);
 });
 
-},{"./flaskfiller.js":3}],10:[function(require,module,exports){
+},{"./flaskfiller.js":3,"./i18n/en.js":4,"./i18n/nl.js":5}],12:[function(require,module,exports){
 /*
  * Copyright 2012, 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
  *
@@ -3219,7 +3326,7 @@ var contour_line = function(canvas, shape_, BOUNDARIES) {
 
 module.exports = contour_line;
 
-},{"../../path":7}],11:[function(require,module,exports){
+},{"../../path":9}],13:[function(require,module,exports){
 /*
  * Copyright 2012, 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
  *
@@ -3386,7 +3493,7 @@ const flaskfiller = function(config) {
 
 module.exports = flaskfiller;
 
-},{"../../dom":2,"../view":18,"./glass":12,"./longdrink_glass":14,"./ruler":15}],12:[function(require,module,exports){
+},{"../../dom":2,"../view":20,"./glass":14,"./longdrink_glass":16,"./ruler":17}],14:[function(require,module,exports){
 /*
  * Copyright 2012, 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
  *
@@ -3630,7 +3737,7 @@ const glass = function(canvas, model, SCALE, snap_values) {
 
 module.exports = glass;
 
-},{}],13:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /*
  * Copyright 2012, 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
  *
@@ -3923,7 +4030,7 @@ var glass_grafter = function(config) {
 
 module.exports = glass_grafter;
 
-},{"../../dom":2,"./contour_line":10,"./ruler":15}],14:[function(require,module,exports){
+},{"../../dom":2,"./contour_line":12,"./ruler":17}],16:[function(require,module,exports){
 /*
  * Copyright 2012, 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
  *
@@ -4084,7 +4191,7 @@ const longdrink_glass = function(canvas, model, SCALE, snap_values, boundaries_)
 
 module.exports = longdrink_glass;
 
-},{"./glass":12}],15:[function(require,module,exports){
+},{"./glass":14}],17:[function(require,module,exports){
 /*
  * Copyright 2012, 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
  *
@@ -4300,7 +4407,7 @@ var ruler = function(canvas, config, MEASURE_LINE_WIDTH_) {
 
 module.exports = ruler;
 
-},{}],16:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /*
  * Copyright 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
  *
@@ -5035,7 +5142,7 @@ const graph = function(config_) {
 
 module.exports = graph;
 
-},{"../dom":2,"./view":18}],17:[function(require,module,exports){
+},{"../dom":2,"./view":20}],19:[function(require,module,exports){
 /*
  * Copyright 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
  *
@@ -5452,7 +5559,7 @@ const table = function(config) {
 
 module.exports = table;
 
-},{"../dom":2,"./view":18}],18:[function(require,module,exports){
+},{"../dom":2,"./view":20}],20:[function(require,module,exports){
 /*
  * Copyright 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
  *
@@ -5564,4 +5671,4 @@ const view = function(config) {
 
 module.exports = view;
 
-},{}]},{},[9]);
+},{}]},{},[11]);

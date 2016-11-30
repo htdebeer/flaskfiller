@@ -18,32 +18,40 @@
  */
 const flaskfiller = require("./flaskfiller.js");
 
+// Get translations
+const LANGUAGES = {
+  "en": require("./i18n/en.js"),
+  "nl": require("./i18n/nl.js")
+};
+
+window.I18N = LANGUAGES[document.documentElement.lang || "en"];
+
 const models = [
 {
-  name: "longdrinkglas",
+  name: "highball_glass",
   type: "predefined",
   register: false
 }, {
-  name: "cocktailglas",
+  name: "cocktail_glass",
   type: "predefined",
   register: true
 }, {
-  name: "wijnglas",
+  name: "wine_glass",
   type: "predefined",
   register: false
 }, {
-  name: "cognacglas",
+  name: "cognac_glasS",
   type: "predefined",
   register: false
 }, {
-  name: "bierglas",
+  name: "beer_glass",
   type: "predefined",
   register: false
 }, {
-  name: "uitrekbaar_longdrinkglas",
-  prefix: "uitrekbaar_longdrinkglas",
+  name: "extensible_highball_glass",
+  prefix: "extensible",
   extensible: true,
-  type: "longdrink",
+  type: "highball",
   radius: 1.1,
   height: 5.8,
   register: false,
@@ -237,7 +245,7 @@ const SETTINGS = [{
   name: "table.quantities.height",
   selector: "input[name='table-quantities'][value='height']",
   type: "checkbox",
-  onChange: toggleColumn("hoogte"),
+  onChange: toggleColumn("height"),
   reload: true
 },{
   name: "table.quantities.volume",
@@ -249,13 +257,13 @@ const SETTINGS = [{
   name: "table.quantities.time",
   selector: "input[name='table-quantities'][value='time']",
   type: "checkbox",
-  onChange: toggleColumn("tijd"),
+  onChange: toggleColumn("time"),
   reload: true
 },{
   name: "table.quantities.speed",
   selector: "input[name='table-quantities'][value='speed']",
   type: "checkbox",
-  onChange: toggleColumn("stijgsnelheid"),
+  onChange: toggleColumn("speed"),
   reload: true
 },{
   name: "table.glass.name",
@@ -407,14 +415,14 @@ const getGlasses = function () {
 
 const getModels = function (glasses) {
   const nameMap = {
-    "cocktail": "cocktailglas",
-    "highball": "longdrinkglas",
-    "extensible-highball": "uitrekbaar_longdrinkglas",
-    "erlenmeyer": "erlenmeyer",
-    "wine": "wijnglas",
-    "cognac": "cognacglas",
-    "beer": "bierglas",
-    "round-bottom": "rondbodemfles"
+    "cocktail": "cocktail_glass",
+    "highball": "highball_glass",
+    "extensible-highball": "extensible_highball_glass",
+    "erlenmeyer": "erlenmeyer_flask",
+    "wine": "wine_glass",
+    "cognac": "cognac_glass",
+    "beer": "beer_glass",
+    "round-bottom": "round_bottom_flask"
   };
   const findModel = function (glassName) {
     return models.filter(function (model) {
@@ -526,4 +534,5 @@ const runFlaskFiller = function () {
 $(document).ready(runFlaskFiller);
 $(window).on("beforeunload", function () {
   saveBeforeUnload();
+  console.log(I18N);
 });
