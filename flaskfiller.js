@@ -950,11 +950,10 @@ const longdrink_glass = function(name, config) {
     actions: create_actions(action_list)
   });
 
-
   let speed = 0;
   function compute_speed() {
     const EPSILON = 0.01;
-    speed = (compute_height(compute_volume(1-EPSILON)) - compute_height(compute_volume(1))) / EPSILON;
+    speed = (compute_height(compute_volume(1)) - compute_height(compute_volume(1 - EPSILON))) / EPSILON;
   }
 
 
