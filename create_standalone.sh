@@ -50,10 +50,25 @@ fi
 
 OUT_FILE="standalone_$TEMPLATE"
 
+# Because pandoc converts all assets to 64 bit encoded text, the source code
+# of flaskfiller becomes unreadable. To prevent this from happening—it is free
+# software after all—, the template is copied, the inclusion of flaskfiller.js
+# is replaced by a recognizable string (READABLE_SOURCE_CODE), and after
+# running pandoc, that string is replaced by the contents of flaskfiller.js.
+# This makes flaskfiller's code readable in the standalone version as well!
+
+READABLE_TEMPLATE="READABLE_$TEMPLATE"
+
+sed -e 's|<script src="flaskfiller.js" charset="utf-8"></script>|<script>\nREADABLE_SOURCE_CODE\n</script>|' $TEMPLATE > $READABLE_TEMPLATE
+
 echo "" | pandoc \
   --from markdown \
   --to html \
-  --template $TEMPLATE \
+  --template $READABLE_TEMPLATE \
   --standalone \
   --self-contained \
   -o $OUT_FILE
+
+rm $READABLE_TEMPLATE
+
+sed -e '/READABLE_SOURCE_CODE/ {' -e 'r flaskfiller.js' -e 'd' -e '}' -i $OUT_FILE
