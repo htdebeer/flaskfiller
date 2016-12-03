@@ -3692,10 +3692,10 @@ const glass = function(canvas, model, SCALE, snap_values) {
     INTERSECTIONS = Raphael.pathIntersection(
         _glass.bowl_shape.attr("path"),
         "M0," + (MAX_LINE_Y) + "h1000"),
-    MAX_LINE_X = Math.min.apply(null,INTERSECTIONS.map(function(e) {return e.x;})) || x
-      ;
-
-
+    MAX_LINE_X = Math.min.apply(null,INTERSECTIONS.map(function(e) {return e.x;})) || x;
+   
+    MAX_LINE_X = Infinity === MAX_LINE_X ? x :  MAX_LINE_X;
+    
     _glass.max_line.attr({
       path: "M" + MAX_LINE_X + "," + MAX_LINE_Y + 
         "h" + MAX_LINE_WIDTH
