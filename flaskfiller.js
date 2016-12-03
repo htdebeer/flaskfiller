@@ -4830,7 +4830,7 @@ const graph = function(config_) {
         .classed("line", true)
         .classed("extensible", model.extensible === true);
 
-    lines
+    const graph_lines = lines
         .selectAll("path")
         .data([data])
         .enter()
@@ -4843,9 +4843,15 @@ const graph = function(config_) {
             .on("mouseover.tooltip", add_tooltip(model_name))
             .on("mousemove.tooltip", add_tooltip(model_name))
             .on("mouseout.tooltip", remove_tooltip(model_name))
-            .on("mouseover.tangent_triangle", add_tangent_triangle(model_name))
-            .on("mousemove.tangent_triangle", add_tangent_triangle(model_name))
             .on("mouseout.tangent_triangle", remove_tangent_triangle(model_name));
+
+    // Do not show the tangent line on an extensible highball glass' graph
+    // because they can be moved and then they can be out of sync.
+    if (!model.extensible) {
+      graph_lines
+        .on("mouseover.tangent_triangle", add_tangent_triangle(model_name))
+        .on("mousemove.tangent_triangle", add_tangent_triangle(model_name));
+    }
 
     // The graph of the extensible highball glass can be moved around as it
     // should be able to act as a tangent line.
