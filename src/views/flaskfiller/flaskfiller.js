@@ -19,7 +19,7 @@
 const view = require("../view");
 const dom = require("../../dom");
 const ruler = require("./ruler");
-const longdrink = require("./longdrink_glass");
+const highball = require("./highball_glass");
 const various_glass = require("./glass");
 
 const flaskfiller = function(config) {
@@ -121,8 +121,8 @@ const flaskfiller = function(config) {
 
     function add_glass(model) {
         var glass;
-        if (model.type === "longdrink") {
-            glass = longdrink(canvas, model, scale, snap_values);
+        if (model.type === "highball") {
+            glass = highball(canvas, model, scale, snap_values);
         } else {
             glass = various_glass(canvas, model, scale, snap_values);
         }

@@ -97,17 +97,8 @@ const graph = function(config_) {
     .style("opacity", 0);
   
   const setAxis = function (orientation, elt) {
-    const translateQuantity = function (en) {
-      const map = {
-        "time": "tijd",
-        "height": "hoogte",
-        "volume": "volume",
-        "speed": "stijgsnelheid"
-      };
-      return map[en];
-    };
     const select = $(elt);
-    const value = translateQuantity(select.val());
+    const value = select.val();
 
     if ("vertical" === orientation) {
       vertical = value;
@@ -515,7 +506,7 @@ const graph = function(config_) {
       }
 
       let maximum = quantity.maximum;
-      if ("hoogte" === quantity_name && config.world_height) {
+      if ("height" === quantity_name && config.world_height) {
         maximum = config.world_height;
       }
 

@@ -24,13 +24,13 @@ const glass = function(name, config) {
   const shape = config.shape;
 
   const quantities = {
-    hoogte: {
+    height: {
       minimum: 0,
       maximum: 0,
       value: 0,
       unit: 'cm',
-      name: "hoogte",
-      label: "hoogte in cm",
+      name: "height",
+      label: I18N.height_in_cm,
       stepsize: 0.01,
       monotone: true,
       precision: 2
@@ -41,43 +41,51 @@ const glass = function(name, config) {
       value: 0,
       unit: 'ml',
       name: "volume",
-      label: "volume in ml",
+      label: I18N.volume_in_ml,
       stepsize: 0.1,
       monotone: true,
       precision: 1
     },
-    tijd: {
+    time: {
       minimum: 0,
       maximum: 0,
       value: 0,
       unit: 'sec',
-      name: "tijd",
-      label: "tijd",
+      name: "time",
+      label: I18N.time_in_sec,
       stepsize: 0.01,
       monotone: true,
       precision: 2
     },
-    stijgsnelheid: {
+    speed: {
       minimum: 0,
       maximum: 0,
       value: 0,
       unit: 'cm/sec',
-      name: 'stijgsnelheid',
-      label: 'stijgsnelheid in cm/sec',
+      name: 'speed',
+      label: I18N.speed_in_cmsec,
       stepsize: 0.01,
       monotone: false,
       precision: 2
     }
   };
 
-
   const step = config.step || 10;
   const time = {
     start: 0,
-    end: quantities.tijd.maximum*1000,
+    end: quantities.time.maximum * 1000,
     step: step
   };
-  const action_list = config.actions || ["start", "pause", "reset", "finish","toggle_line", "toggle_tailpoints", "toggle_arrows", "step_size"];
+  const action_list = config.actions || [
+    "start", 
+    "pause", 
+    "reset", 
+    "finish", 
+    "toggle_line", 
+    "toggle_tailpoints", 
+    "toggle_arrows", 
+    "step_size"
+  ];
   const default_actions = require("../actions")({speed: step});
 
   function create_actions(action_list) {
@@ -167,7 +175,6 @@ const glass = function(name, config) {
       return ml / flow_rate;
     }
 
-
     let h = h_start;
     let r;
     let area;
@@ -183,11 +190,11 @@ const glass = function(name, config) {
     let delta_h = 0;
 
     const values = [{
-      tijd: time,
-      hoogte: h,
+      time: time,
+      height: h,
       volume: vol,
       length: l,
-      stijgsnelheid: speed
+      speed: speed
     }];
 
     while (l > l_start) {
@@ -205,24 +212,23 @@ const glass = function(name, config) {
       vol += delta_vol;
 
       if (delta_time >= ms_step ) {
-        //time += delta_time;
         time += ms_step;
         vol = time * flow_rate;
-        speed = (h - values[values.length - 1].hoogte) / delta_time;
+        speed = (h - values[values.length - 1].height) / delta_time;
 
         values.push({
-          tijd: time,
-          hoogte: h,
+          time: time,
+          height: h,
           volume: vol,
           length: l,
-          stijgsnelheid: speed
+          speed: speed
         });
 
         delta_time = 0;
       }
     }
 
-    values[0].stijgsnelheid = values[1].stijgsnelheid;
+    values[0].speed = values[1].speed;
     return values;
   }
 
@@ -234,19 +240,19 @@ const glass = function(name, config) {
     values = compute_quantities();
 
     const max = values[values.length - 1];
-    const max_tijd_in_ms = (values.length - 1) * step;
+    const max_time_in_ms = (values.length - 1) * step;
 
-    _model.set_end(max_tijd_in_ms / 1000);
-    _model.quantities._time_.maximum = max_tijd_in_ms;
+    _model.set_end(max_time_in_ms / 1000);
+    _model.quantities._time_.maximum = max_time_in_ms;
 
-    _model.quantities.tijd.maximum = max.tijd.toFixed(quantities.tijd.precision);
-    _model.quantities.hoogte.maximum = max.hoogte.toFixed(quantities.hoogte.precision);
-    _model.quantities.hoogte.minimum = 0;//min.hoogte.toFixed(quantities.hoogte.precision);
+    _model.quantities.time.maximum = max.time.toFixed(quantities.time.precision);
+    _model.quantities.height.maximum = max.height.toFixed(quantities.height.precision);
+    _model.quantities.height.minimum = 0;
     _model.quantities.volume.maximum = max.volume.toFixed(quantities.volume.precision);
 
-    _model.quantities.stijgsnelheid.maximum = Math.max.apply(null, values.map(function(v) {return v.stijgsnelheid;})) + 1;
+    _model.quantities.speed.maximum = Math.max.apply(null, values.map(function(v) {return v.speed;})) + 1;
 
-    _model.quantities.stijgsnelheid.minimum = Math.min.apply(null, values.map(function(v) {return v.stijgsnelheid;})) - 1;
+    _model.quantities.speed.minimum = Math.min.apply(null, values.map(function(v) {return v.speed;})) - 1;
   }
 
   compute_maxima();
@@ -254,7 +260,6 @@ const glass = function(name, config) {
   _model.measure_moment = function(moment) {
     return values[moment];
   };
-
 
   _model.step();
   return _model;

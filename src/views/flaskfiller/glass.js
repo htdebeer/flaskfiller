@@ -172,7 +172,7 @@ const glass = function(canvas, model, SCALE, snap_values) {
     var MAX_LINE_WIDTH = Math.min(30, width / 2),
     MAX_LINE_SKIP = 5,
     BORDERS_ADD = _glass.bowl_shape.attr("stroke-width") * 2,
-    MAX_LINE_Y = y + height - model.get_maximum("hoogte") * 10 * SCALE - BORDERS_ADD,
+    MAX_LINE_Y = y + height - model.get_maximum("height") * 10 * SCALE - BORDERS_ADD,
     INTERSECTIONS = Raphael.pathIntersection(
         _glass.bowl_shape.attr("path"),
         "M0," + (MAX_LINE_Y) + "h1000"),

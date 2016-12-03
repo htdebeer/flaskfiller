@@ -40,7 +40,7 @@ const models = [
   type: "predefined",
   register: false
 }, {
-  name: "cognac_glasS",
+  name: "cognac_glass",
   type: "predefined",
   register: false
 }, {
@@ -432,16 +432,6 @@ const getModels = function (glasses) {
   return glasses.map(findModel);
 };
 
-const translateQuantity = function (en) {
-  const map = {
-    "time": "tijd",
-    "height": "hoogte",
-    "volume": "volume",
-    "speed": "stijgsnelheid"
-  };
-  return map[en];
-};
-
 const quantitiesNotInTable = function (quantitiesToAdd) {
   const quantities = ["height", "time", "volume", "speed"];
   const skipAdded = function (quantity) {
@@ -469,8 +459,7 @@ const getConfiguration = function () {
     scale: 2,
     models: getModels(getGlasses()),
     world_height: getWorldHeight(),
-    not_in_table: quantitiesNotInTable(getTableQuantities())
-      .map(translateQuantity) 
+    not_in_table: quantitiesNotInTable(getTableQuantities()) 
   };
 
   const dimension = determineDimensions();
@@ -486,8 +475,8 @@ const getConfiguration = function () {
     width: dimension.graph,
     height: dimension.height,
     axes: {
-      horizontal: translateQuantity(getAxis("horizontal") || "time"),
-      vertical: translateQuantity(getAxis("vertical") || "vertical")
+      horizontal: getAxis("horizontal") || "time",
+      vertical: getAxis("vertical") || "vertical"
     },
     types: getGraphTypes(),
     options: getGraphOptions()

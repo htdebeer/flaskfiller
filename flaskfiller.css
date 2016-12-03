@@ -128,6 +128,7 @@ input {
 
 span.unit {
   font-size: smaller;
+  padding-left: 2px;
 }
 
 input[type='range'] {

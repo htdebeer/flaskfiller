@@ -19,7 +19,7 @@
 
 const glass = require("./glass");
 
-const longdrink_glass = function(canvas, model, SCALE, snap_values, boundaries_) {
+const highball_glass = function(canvas, model, SCALE, snap_values, boundaries_) {
     const HANDLE_SPACE = 15;
     const    HANDLE_SIZE = 2.5;
     const PADDING = 5;
@@ -112,7 +112,7 @@ const longdrink_glass = function(canvas, model, SCALE, snap_values, boundaries_)
         update_size();
         const MAX_LINE_WIDTH = Math.min(30, _glass.width / 2);
         const MAX_LINE_SKIP = 5;
-        const MAX_LINE_Y = y + _glass.height - model.get_maximum("hoogte") * 10 * SCALE;
+        const MAX_LINE_Y = y + _glass.height - model.get_maximum("height") * 10 * SCALE;
 
         _glass.max_line.attr({
             path: "M" + x + "," + MAX_LINE_Y + 
@@ -156,4 +156,4 @@ const longdrink_glass = function(canvas, model, SCALE, snap_values, boundaries_)
     return _glass;
 };
 
-module.exports = longdrink_glass;
+module.exports = highball_glass;

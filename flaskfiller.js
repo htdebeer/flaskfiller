@@ -329,8 +329,7 @@ module.exports = dom;
  * You should have received a copy of the GNU General Public License
  * along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
  */
-const glass_model = require("./models/glass");
-const longdrink_model = require("./models/longdrink_glass");
+const highball_model = require("./models/highball_glass");
 const predefined = require("./predefined_glasses");
 const simulation = require("./views/flaskfiller/flaskfiller");
 const table = require("./views/table");
@@ -344,23 +343,23 @@ const flaskfiller = function flaskfiller(config) {
   const flow_rate = config.flow_rate || 50; // ml per sec
   const scale = config.scale || 3.5; // px per mm
   const quantities = {
-    hoogte: {
-      name: "hoogte",
+    height: {
+      name: "height",
       minimum: 0,
       maximum: 10,
       value: 0,
-      label: "hoogte in cm",
+      label: I18N.height_in_cm,
       unit: "cm",
       stepsize: 0.01,
       precision: 2,
       monotone: true
     },
-    tijd: {
-      name: "tijd",
+    time: {
+      name: "time",
       minimum: 0,
       maximum: 100,
       value: 0,
-      label: "tijd in sec",
+      label: I18N.time_in_sec,
       unit: "sec",
       stepsize: 0.01,
       precision: 2,
@@ -371,19 +370,19 @@ const flaskfiller = function flaskfiller(config) {
       minimum: 0,
       maximum: 1000,
       value: 0,
-      label: "volume in ml",
+      label: I18N.volume_in_ml,
       unit: "ml",
       stepsize: 0.01,
       precision: 2,
       monotone: true
     },
-    stijgsnelheid: {
+    speed: {
       minimum: 0,
       maximum: 0,
       value: 0,
       unit: 'cm/sec',
-      name: 'stijgsnelheid',
-      label: 'stijgsnelheid in cm/sec',
+      name: "speed",
+      label: I18N.speed_in_cmsec,
       stepsize: 0.01,
       monotone: false,
       precision: 2
@@ -413,8 +412,8 @@ const flaskfiller = function flaskfiller(config) {
       quantities: quantities,
       scale: scale,
       world_height: WORLD_HEIGHT,
-      horizontal: "tijd",
-      vertical: "hoogte",
+      horizontal: "time",
+      vertical: "height",
       dimensions: {
         width: config.width || 600,
         height: config.height || 400,
@@ -510,8 +509,8 @@ const flaskfiller = function flaskfiller(config) {
           flow_rate: flow_rate
         });
         break;
-      case "longdrink":
-        model = longdrink_model(model_spec.name, {
+      case "highball":
+        model = highball_model(model_spec.name, {
           name: model_spec.name,
           radius: model_spec.radius,
           height: model_spec.height,
@@ -557,7 +556,7 @@ const flaskfiller = function flaskfiller(config) {
 
 module.exports = flaskfiller;
 
-},{"./models/glass":6,"./models/longdrink_glass":7,"./predefined_glasses":10,"./views/flaskfiller/flaskfiller":13,"./views/flaskfiller/glass_grafter":15,"./views/graph":18,"./views/table":19}],4:[function(require,module,exports){
+},{"./models/highball_glass":7,"./predefined_glasses":10,"./views/flaskfiller/flaskfiller":13,"./views/flaskfiller/glass_grafter":15,"./views/graph":18,"./views/table":19}],4:[function(require,module,exports){
 /*
  * Copyright 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
  *
@@ -577,33 +576,45 @@ module.exports = flaskfiller;
  * along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
  */
 module.exports = {
-  height: "height",
-  volume: "volume",
-  time: "time",
-  speed: "rising speed",
-
-  highball_glass: "highball glass",
-  cocktail_glass: "cocktail glass",
-  wine_glass: "wine glass",
-  cognac_glass: "cognac glass",
+  add_a_model: "add a glass", 
   beer_glass: "beer glass",
+  change: "change",
+  click_to_change_color: "click to change the color.",
+  cocktail_glass: "cocktail glass",
+  cognac_glass: "cognac glass",
+  extensible: "extensible",
   extensible_highball_glass: "extensible highball glass",
-  highball: "highball",
-
-  start: "start",
-  start_simulation: "Start simulation",
   finish: "finish",
-  pause: "pause",
-  reset: "reset",
-  pause_simulation: "Pause simulation.",
-  reset_simulation: "Reset simulation.",
   finish_simulation: "Finish simulation.",
-
-  show_line_graph: "Show/hide line graph.",
+  height: "height",
+  height_in_cm: "height in cm",
+  highball: "highball",
+  highball_glass: "highball glass",
+  larger_highball_glass: "larger highball glass",
+  pause: "pause",
+  pause_simulation: "Pause simulation.",
+  remove: "remove",
+  remove_this_model: "remove this glass",
+  reset: "reset",
+  reset_simulation: "Reset simulation.",
+  set_step_size: "Set the step size.",
   show_arrow_graph: "Show/hide arrow graph.",
   show_bar_graph: "Show/hide bar graph.",
-  set_step_size: "Set the step size.",
-  
+  show_line_graph: "Show/hide line graph.",
+  small_cocktail_glass: "small cocktail glass",
+  small_highball_glass: "small highball glass",
+  speed: "rising speed",
+  speed_in_cmsec: "rising speed in cm/sec",
+  start: "start",
+  start_simulation: "Start simulation",
+  time: "time",
+  time_in_sec: "time in sec",
+  vase: "vase",
+  volume: "volume",
+  volume_in_ml: "volume in ml",
+  wide_highball_glass: "wide highball glass",
+  wine_glass: "wine glass",
+
 };
 
 },{}],5:[function(require,module,exports){
@@ -626,33 +637,44 @@ module.exports = {
  * along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
  */
 module.exports = {
-  height: "hoogte",
-  volume: "volume",
-  time: "tijd",
-  speed: "stijgsnelheid",
-
-  highball_glass: "longdrinkglas",
-  cocktail_glass: "cocktailglas",
-  wine_glass: "wijnglas",
-  cognac_glass: "cognacglas",
+  add_a_model: "voeg een glas toe",
   beer_glass: "bierglas",
+  change: "verander", 
+  click_to_change_color: "klik om de kleur te veranderen.",
+  cocktail_glass: "cocktailglas",
+  cognac_glass: "cognacglas",
+  extensible: "uitrekbaar",
   extensible_highball_glass: "uitrekbaar longdrinkglas",
-  highball: "longdrinkg",
-
-  start: "start",
-  start_simulation: "Start simulatie.",
   finish: "finish",
+  finish_simulation: "Naar het einde van de simulatie.",
+  height: "hoogte",
+  height_in_cm: "hoogte in cm",
+  highball: "longdrink",
+  highball_glass: "longdrinkglas",
+  larger_highball_glass: "groter longdrinkglas",
   pause: "pauzeer",
-  reset: "reset",
   pause_simulation: "Simulatie pauzeren.",
+  remove: "verwijderen",
+  remove_this_model: "verwijder dit glas",
+  reset: "reset",
   reset_simulation: "Simulatie herbeginnen.",
-  finish_simulation: "Simulatie beëindingen.",
-
-  show_line_graph: "Laat de lijngrafiek zien of verberg de lijngrafiek.",
+  set_step_size: "Stel de stapgrootte in.",
   show_arrow_graph: "Laat de pijlgrafiek zien of verberg de pijlgrafiek.",
   show_bar_graph: "Laat de staafgrafiek zien of verberg de staafgrafiek.",
-  set_step_size: "Stel de stapgrootte in.",
-  
+  show_line_graph: "Laat de lijngrafiek zien of verberg de lijngrafiek.",
+  small_cocktail_glass: "klein cocktailglas",
+  small_highball_glass: "klein longdrinkglas",
+  speed: "stijgsnelheid",
+  speed_in_cmsec: "stijgsnelheid in cm/sec",
+  start: "start",
+  start_simulation: "Start simulatie.",
+  time: "tijd",
+  time_in_sec: "tijd in sec",
+  vase: "vaas",
+  volume: "volume",
+  volume_in_ml: "volume in ml",
+  wide_highball_glass: "breed longdrinkglas",
+  wine_glass: "wijnglas",
 };
 
 },{}],6:[function(require,module,exports){
@@ -682,13 +704,13 @@ const glass = function(name, config) {
   const shape = config.shape;
 
   const quantities = {
-    hoogte: {
+    height: {
       minimum: 0,
       maximum: 0,
       value: 0,
       unit: 'cm',
-      name: "hoogte",
-      label: "hoogte in cm",
+      name: "height",
+      label: I18N.height_in_cm,
       stepsize: 0.01,
       monotone: true,
       precision: 2
@@ -699,43 +721,51 @@ const glass = function(name, config) {
       value: 0,
       unit: 'ml',
       name: "volume",
-      label: "volume in ml",
+      label: I18N.volume_in_ml,
       stepsize: 0.1,
       monotone: true,
       precision: 1
     },
-    tijd: {
+    time: {
       minimum: 0,
       maximum: 0,
       value: 0,
       unit: 'sec',
-      name: "tijd",
-      label: "tijd",
+      name: "time",
+      label: I18N.time_in_sec,
       stepsize: 0.01,
       monotone: true,
       precision: 2
     },
-    stijgsnelheid: {
+    speed: {
       minimum: 0,
       maximum: 0,
       value: 0,
       unit: 'cm/sec',
-      name: 'stijgsnelheid',
-      label: 'stijgsnelheid in cm/sec',
+      name: 'speed',
+      label: I18N.speed_in_cmsec,
       stepsize: 0.01,
       monotone: false,
       precision: 2
     }
   };
 
-
   const step = config.step || 10;
   const time = {
     start: 0,
-    end: quantities.tijd.maximum*1000,
+    end: quantities.time.maximum * 1000,
     step: step
   };
-  const action_list = config.actions || ["start", "pause", "reset", "finish","toggle_line", "toggle_tailpoints", "toggle_arrows", "step_size"];
+  const action_list = config.actions || [
+    "start", 
+    "pause", 
+    "reset", 
+    "finish", 
+    "toggle_line", 
+    "toggle_tailpoints", 
+    "toggle_arrows", 
+    "step_size"
+  ];
   const default_actions = require("../actions")({speed: step});
 
   function create_actions(action_list) {
@@ -825,7 +855,6 @@ const glass = function(name, config) {
       return ml / flow_rate;
     }
 
-
     let h = h_start;
     let r;
     let area;
@@ -841,11 +870,11 @@ const glass = function(name, config) {
     let delta_h = 0;
 
     const values = [{
-      tijd: time,
-      hoogte: h,
+      time: time,
+      height: h,
       volume: vol,
       length: l,
-      stijgsnelheid: speed
+      speed: speed
     }];
 
     while (l > l_start) {
@@ -863,24 +892,23 @@ const glass = function(name, config) {
       vol += delta_vol;
 
       if (delta_time >= ms_step ) {
-        //time += delta_time;
         time += ms_step;
         vol = time * flow_rate;
-        speed = (h - values[values.length - 1].hoogte) / delta_time;
+        speed = (h - values[values.length - 1].height) / delta_time;
 
         values.push({
-          tijd: time,
-          hoogte: h,
+          time: time,
+          height: h,
           volume: vol,
           length: l,
-          stijgsnelheid: speed
+          speed: speed
         });
 
         delta_time = 0;
       }
     }
 
-    values[0].stijgsnelheid = values[1].stijgsnelheid;
+    values[0].speed = values[1].speed;
     return values;
   }
 
@@ -892,19 +920,19 @@ const glass = function(name, config) {
     values = compute_quantities();
 
     const max = values[values.length - 1];
-    const max_tijd_in_ms = (values.length - 1) * step;
+    const max_time_in_ms = (values.length - 1) * step;
 
-    _model.set_end(max_tijd_in_ms / 1000);
-    _model.quantities._time_.maximum = max_tijd_in_ms;
+    _model.set_end(max_time_in_ms / 1000);
+    _model.quantities._time_.maximum = max_time_in_ms;
 
-    _model.quantities.tijd.maximum = max.tijd.toFixed(quantities.tijd.precision);
-    _model.quantities.hoogte.maximum = max.hoogte.toFixed(quantities.hoogte.precision);
-    _model.quantities.hoogte.minimum = 0;//min.hoogte.toFixed(quantities.hoogte.precision);
+    _model.quantities.time.maximum = max.time.toFixed(quantities.time.precision);
+    _model.quantities.height.maximum = max.height.toFixed(quantities.height.precision);
+    _model.quantities.height.minimum = 0;
     _model.quantities.volume.maximum = max.volume.toFixed(quantities.volume.precision);
 
-    _model.quantities.stijgsnelheid.maximum = Math.max.apply(null, values.map(function(v) {return v.stijgsnelheid;})) + 1;
+    _model.quantities.speed.maximum = Math.max.apply(null, values.map(function(v) {return v.speed;})) + 1;
 
-    _model.quantities.stijgsnelheid.minimum = Math.min.apply(null, values.map(function(v) {return v.stijgsnelheid;})) - 1;
+    _model.quantities.speed.minimum = Math.min.apply(null, values.map(function(v) {return v.speed;})) - 1;
   }
 
   compute_maxima();
@@ -912,7 +940,6 @@ const glass = function(name, config) {
   _model.measure_moment = function(moment) {
     return values[moment];
   };
-
 
   _model.step();
   return _model;
@@ -947,13 +974,13 @@ const model = require("./model");
  * flow_rate in ml/sec
  *
  */
-const longdrink_glass = function(name, config) {
+const highball_glass = function(name, config) {
   let radius = config.radius || 2;
   let height = config.height || 7.5;
   let flow_rate = config.flow_rate || 50;
 
   /**
-   * Compute the volume in ml in the longdrink glass given flow_rate and time the
+   * Compute the volume in ml in the highball glass given flow_rate and time the
    * water has flown in seconds.
    */
   function compute_volume(time) {
@@ -975,13 +1002,13 @@ const longdrink_glass = function(name, config) {
   }
   
   const quantities = {
-    hoogte: {
+    height: {
       minimum: 0,
       maximum: 0,
       value: 0,
       unit: 'cm',
-      name: "hoogte",
-      label: "hoogte in cm",
+      name: "height",
+      label: I18N.height_in_cm,
       stepsize: 0.01,
       monotone: true,
       precision: 2
@@ -992,43 +1019,51 @@ const longdrink_glass = function(name, config) {
       value: 0,
       unit: 'ml',
       name: "volume",
-      label: "volume in ml",
+      label: I18N.volume_in_ml,
       stepsize: 0.1,
       monotone: true,
       precision: 1
     },
-    tijd: {
+    time: {
       minimum: 0,
       maximum: 0,
       value: 0,
       unit: 'sec',
-      name: "tijd",
-      label: "tijd",
+      name: "time",
+      label: I18N.time_in_sec,
       stepsize: 0.01,
       monotone: true,
       precision: 2
     },
-    stijgsnelheid: {
+    speed: {
       minimum: 0,
       maximum: 0,
       value: 0,
       unit: 'cm/sec',
-      name: 'stijgsnelheid',
-      label: 'stijgsnelheid in cm/sec',
+      name: 'speed',
+      label: I18N.speed_in_cmsec,
       stepsize: 0.01,
       monotone: false,
       precision: 2
     }
   };
 
-
   const step = config.step || 10;
   const time = {
     start: 0,
-    end: quantities.tijd.maximum*1000,
+    end: quantities.time.maximum*1000,
     step: step
   };
-  const action_list = config.actions || ["start", "pause", "reset", "finish","toggle_line", "toggle_tailpoints", "toggle_arrows", "step_size"];
+  const action_list = config.actions || [
+    "start", 
+    "pause", 
+    "reset", 
+    "finish",
+    "toggle_line", 
+    "toggle_tailpoints", 
+    "toggle_arrows", 
+    "step_size"
+  ];
   const default_actions = require("../actions")({speed: step});
 
   function create_actions(action_list) {
@@ -1039,8 +1074,6 @@ const longdrink_glass = function(name, config) {
     action_list.forEach(create_action);
     return actions;
   }
-
-
 
   const _model = model(name, {
     time: time,
@@ -1054,7 +1087,6 @@ const longdrink_glass = function(name, config) {
     speed = (compute_height(compute_volume(1)) - compute_height(compute_volume(1 - EPSILON))) / EPSILON;
   }
 
-
   function compute_maxima() {
     const area = Math.PI * Math.pow(radius, 2);
     const time_max = Math.floor(area*height*10 / flow_rate)/10;
@@ -1063,28 +1095,27 @@ const longdrink_glass = function(name, config) {
 
     _model.set_end(time_max);
 
-    _model.quantities.tijd.maximum = time_max.toFixed(quantities.tijd.precision);
-    _model.quantities.hoogte.maximum = height_max.toFixed(quantities.hoogte.precision);
+    _model.quantities.time.maximum = time_max.toFixed(quantities.time.precision);
+    _model.quantities.height.maximum = height_max.toFixed(quantities.height.precision);
     _model.quantities.volume.maximum = volume_max.toFixed(quantities.volume.precision);
 
-    _model.quantities.stijgsnelheid.minimum = speed-1;
-    _model.quantities.stijgsnelheid.maximum = speed+1;
+    _model.quantities.speed.minimum = speed-1;
+    _model.quantities.speed.maximum = speed+1;
   }
 
   compute_maxima();
 
   _model.measure_moment = function(moment) {
     const time_in_ms = _model.moment_to_time(moment);
-    const tijd = time_in_ms / 1000;
-    const volume = compute_volume(tijd);
-    const hoogte = compute_height(volume);
-    const stijgsnelheid = speed;
+    const time = time_in_ms / 1000;
+    const volume = compute_volume(time);
+    const height = compute_height(volume);
 
     return {
-      tijd: tijd,
+      time: time,
       volume: volume,
-      hoogte: hoogte,
-      stijgsnelheid: stijgsnelheid
+      height: height,
+      speed: speed
     };
   };
 
@@ -1094,7 +1125,7 @@ const longdrink_glass = function(name, config) {
     let h = height * SCALE * 10;
 
     if (fill) {
-      h = _model.get("hoogte") * SCALE * 10;
+      h = _model.get("height") * SCALE * 10;
       y += height * SCALE * 10 - h;
     }
 
@@ -1113,7 +1144,7 @@ const longdrink_glass = function(name, config) {
 
   _model.step();
   _model.compute_maxima = compute_maxima;
-  _model.type = "longdrink";
+  _model.type = "highball";
   _model.height = function(h) {
     if (arguments.length === 1) {
       height = h;
@@ -1148,7 +1179,7 @@ const longdrink_glass = function(name, config) {
   return _model;
 };
 
-module.exports = longdrink_glass;
+module.exports = highball_glass;
 
 },{"../actions":1,"./model":8}],8:[function(require,module,exports){
 /*
@@ -1470,7 +1501,7 @@ const model = function(name, config) {
 
 
   _model.get_minimum = function(quantity) {
-    if (arguments.length===0) {
+    if (arguments.length === 0) {
       // called without any arguments: return all minima
       const minima = {};
       const add_minimum = function(quantity) {
@@ -1486,7 +1517,7 @@ const model = function(name, config) {
   };
 
   _model.get_maximum = function(quantity) {
-    if (arguments.length===0) {
+    if (arguments.length === 0) {
       // called without any arguments: return all minima
       const maxima = {};
       const add_maximum = function(quantity) {
@@ -1947,7 +1978,7 @@ module.exports = {
 const glass_model = require("./models/glass");
 
 const glass_specifications = {
-  klein_longdrinkglas: {
+  small_highball_glass: {
     "bowl": {
       "top": {
         "x": 67,
@@ -1972,7 +2003,7 @@ const glass_specifications = {
     },
     "scale": 3
   },
-  longdrinkglas: {
+  highball_glass: {
     "bowl": {
       "top": {
         "x": 88,
@@ -1997,7 +2028,7 @@ const glass_specifications = {
     },
     "scale": 3
   },
-  groter_longdrinkglas: {
+  larger_highball_glass: {
     "bowl": {
       "top": {
         "x": 94,
@@ -2022,7 +2053,7 @@ const glass_specifications = {
     },
     "scale": 3
   },
-  breed_longdrinkglas: {
+  wide_highball_glass: {
     "bowl": {
       "top": {
         "x": 129,
@@ -2047,7 +2078,7 @@ const glass_specifications = {
     },
     "scale": 3
   },
-  cocktailglas: {
+  cocktail_glass: {
     "bowl": {
       "top": {
         "x": 169,
@@ -2072,7 +2103,7 @@ const glass_specifications = {
     },
     "scale": 3
   },
-  klein_cocktailglas: {
+  small_cocktail_glass: {
     "bowl": {
       "top": {
         "x": 141,
@@ -2097,7 +2128,7 @@ const glass_specifications = {
     },
     "scale": 3
   },
-  wijnglas: {
+  wine_glass: {
     "bowl": {
       "top": {
         "x": 99,
@@ -2122,7 +2153,7 @@ const glass_specifications = {
     },
     "scale": 3
   },
-  cognacglas: {
+  cognac_glass: {
     "bowl": {
       "top": {
         "x": 69,
@@ -2146,7 +2177,7 @@ const glass_specifications = {
       "path": "l0,70 l77,9 c5,2.5,7.5,7.5,5,10"},
       "scale": 3
   },
-  bierglas: {
+  beer_glass: {
     "bowl": {
       "top": {
         "x": 108,
@@ -2171,7 +2202,7 @@ const glass_specifications = {
     },
     "scale": 3
   },
-  vaas: {
+  vase: {
     "bowl": {
       "top": {
         "x": 53,
@@ -2249,7 +2280,7 @@ const models = [
   type: "predefined",
   register: false
 }, {
-  name: "cognac_glasS",
+  name: "cognac_glass",
   type: "predefined",
   register: false
 }, {
@@ -2641,16 +2672,6 @@ const getModels = function (glasses) {
   return glasses.map(findModel);
 };
 
-const translateQuantity = function (en) {
-  const map = {
-    "time": "tijd",
-    "height": "hoogte",
-    "volume": "volume",
-    "speed": "stijgsnelheid"
-  };
-  return map[en];
-};
-
 const quantitiesNotInTable = function (quantitiesToAdd) {
   const quantities = ["height", "time", "volume", "speed"];
   const skipAdded = function (quantity) {
@@ -2678,8 +2699,7 @@ const getConfiguration = function () {
     scale: 2,
     models: getModels(getGlasses()),
     world_height: getWorldHeight(),
-    not_in_table: quantitiesNotInTable(getTableQuantities())
-      .map(translateQuantity) 
+    not_in_table: quantitiesNotInTable(getTableQuantities()) 
   };
 
   const dimension = determineDimensions();
@@ -2695,8 +2715,8 @@ const getConfiguration = function () {
     width: dimension.graph,
     height: dimension.height,
     axes: {
-      horizontal: translateQuantity(getAxis("horizontal") || "time"),
-      vertical: translateQuantity(getAxis("vertical") || "vertical")
+      horizontal: getAxis("horizontal") || "time",
+      vertical: getAxis("vertical") || "vertical"
     },
     types: getGraphTypes(),
     options: getGraphOptions()
@@ -3348,7 +3368,7 @@ module.exports = contour_line;
 const view = require("../view");
 const dom = require("../../dom");
 const ruler = require("./ruler");
-const longdrink = require("./longdrink_glass");
+const highball = require("./highball_glass");
 const various_glass = require("./glass");
 
 const flaskfiller = function(config) {
@@ -3450,8 +3470,8 @@ const flaskfiller = function(config) {
 
     function add_glass(model) {
         var glass;
-        if (model.type === "longdrink") {
-            glass = longdrink(canvas, model, scale, snap_values);
+        if (model.type === "highball") {
+            glass = highball(canvas, model, scale, snap_values);
         } else {
             glass = various_glass(canvas, model, scale, snap_values);
         }
@@ -3493,7 +3513,7 @@ const flaskfiller = function(config) {
 
 module.exports = flaskfiller;
 
-},{"../../dom":2,"../view":20,"./glass":14,"./longdrink_glass":16,"./ruler":17}],14:[function(require,module,exports){
+},{"../../dom":2,"../view":20,"./glass":14,"./highball_glass":16,"./ruler":17}],14:[function(require,module,exports){
 /*
  * Copyright 2012, 2013, 2016 Huub de Beer <Huub@heerdebeer.org>
  *
@@ -3668,7 +3688,7 @@ const glass = function(canvas, model, SCALE, snap_values) {
     var MAX_LINE_WIDTH = Math.min(30, width / 2),
     MAX_LINE_SKIP = 5,
     BORDERS_ADD = _glass.bowl_shape.attr("stroke-width") * 2,
-    MAX_LINE_Y = y + height - model.get_maximum("hoogte") * 10 * SCALE - BORDERS_ADD,
+    MAX_LINE_Y = y + height - model.get_maximum("height") * 10 * SCALE - BORDERS_ADD,
     INTERSECTIONS = Raphael.pathIntersection(
         _glass.bowl_shape.attr("path"),
         "M0," + (MAX_LINE_Y) + "h1000"),
@@ -4052,7 +4072,7 @@ module.exports = glass_grafter;
 
 const glass = require("./glass");
 
-const longdrink_glass = function(canvas, model, SCALE, snap_values, boundaries_) {
+const highball_glass = function(canvas, model, SCALE, snap_values, boundaries_) {
     const HANDLE_SPACE = 15;
     const    HANDLE_SIZE = 2.5;
     const PADDING = 5;
@@ -4145,7 +4165,7 @@ const longdrink_glass = function(canvas, model, SCALE, snap_values, boundaries_)
         update_size();
         const MAX_LINE_WIDTH = Math.min(30, _glass.width / 2);
         const MAX_LINE_SKIP = 5;
-        const MAX_LINE_Y = y + _glass.height - model.get_maximum("hoogte") * 10 * SCALE;
+        const MAX_LINE_Y = y + _glass.height - model.get_maximum("height") * 10 * SCALE;
 
         _glass.max_line.attr({
             path: "M" + x + "," + MAX_LINE_Y + 
@@ -4189,7 +4209,7 @@ const longdrink_glass = function(canvas, model, SCALE, snap_values, boundaries_)
     return _glass;
 };
 
-module.exports = longdrink_glass;
+module.exports = highball_glass;
 
 },{"./glass":14}],17:[function(require,module,exports){
 /*
@@ -4507,17 +4527,8 @@ const graph = function(config_) {
     .style("opacity", 0);
   
   const setAxis = function (orientation, elt) {
-    const translateQuantity = function (en) {
-      const map = {
-        "time": "tijd",
-        "height": "hoogte",
-        "volume": "volume",
-        "speed": "stijgsnelheid"
-      };
-      return map[en];
-    };
     const select = $(elt);
-    const value = translateQuantity(select.val());
+    const value = select.val();
 
     if ("vertical" === orientation) {
       vertical = value;
@@ -4925,7 +4936,7 @@ const graph = function(config_) {
       }
 
       let maximum = quantity.maximum;
-      if ("hoogte" === quantity_name && config.world_height) {
+      if ("height" === quantity_name && config.world_height) {
         maximum = config.world_height;
       }
 
@@ -5178,7 +5189,7 @@ const table = function(config) {
       name: "remove",
       group: "edit",
       icon: "fa-remove",
-      tooltip: "Remove this model",
+      tooltip: I18N.remove_this_model,
       enabled: true,
       callback: function(model) {
         return function() {
@@ -5210,7 +5221,7 @@ const table = function(config) {
     function create_option(model, index) {
       return {
         name: "option",
-        text: model.name.replace("_", " "),
+        text: I18N[model.name],
         attributes: {
           value: index
         }
@@ -5224,7 +5235,7 @@ const table = function(config) {
       },
       children: [{
         name: "option",
-        text: "toevoegen ...",
+        text: I18N.add_a_model + "…",
         value: -1
       }].concat(list.map(create_option)),
       on: {
@@ -5297,7 +5308,7 @@ const table = function(config) {
 
         head.appendChild( dom.create({
           name: "th",
-          value: quantity.name.replace("_", " "),
+          value: I18N[quantity.name],
           attributes: {
             "data-quantity": quantity.name
           }
@@ -5342,7 +5353,8 @@ const table = function(config) {
           name: "input",
           attributes: {
             "type": "text",                        
-            "pattern": "(\\+|-)?\\d*((\\.|,)\\d+)?"
+            "pattern": "(\\+|-)?\\d*((\\.|,)\\d+)?",
+            "title": I18N.change + " " + I18N[q]
           },
           on: {
             type: "change",
@@ -5404,6 +5416,7 @@ const table = function(config) {
         attributes.max = 4 * model.step_size();
         attributes.step = 1;
         attributes.value = model.step_size() * 2;
+        attributes.title = action.tooltip;
 
         return {
           name: "input",
@@ -5419,6 +5432,7 @@ const table = function(config) {
         if (action.toggled) {
           attributes["data-toggled"] = true;
         }
+        attributes.title = action.tooltip;
         return {
           name: "button",
           attributes: attributes,
@@ -5441,6 +5455,14 @@ const table = function(config) {
     model.add_action(remove_action());
     const actions_elts = Object.keys(model.actions).filter(show_this_action).map(create_action_elt);
 
+    let translated_name = "";
+    if (model.extensible) {
+      // Extensible models have a special name
+      translated_name = I18N.extensible_highball_glass + " " + model.name.split("_").pop();
+    } else {
+      translated_name = I18N[model.name];
+    }
+
     row = table_body.appendChild(
         dom.create( {
           name: "tr",
@@ -5449,12 +5471,13 @@ const table = function(config) {
           },
           children: [{
             name: "td",
-            value: model.name.split("_").join(" "),
+            value: translated_name,
             attributes: { "class": "glass-name " + model.name }
           },{
             name: "td",
             attributes: {
-              "class": "color"
+              "class": "color",
+              "title": I18N.click_to_change_color
             },
             children: [{
               name: "span",

@@ -33,7 +33,7 @@ const table = function(config) {
       name: "remove",
       group: "edit",
       icon: "fa-remove",
-      tooltip: "Remove this model",
+      tooltip: I18N.remove_this_model,
       enabled: true,
       callback: function(model) {
         return function() {
@@ -65,7 +65,7 @@ const table = function(config) {
     function create_option(model, index) {
       return {
         name: "option",
-        text: model.name.replace("_", " "),
+        text: I18N[model.name],
         attributes: {
           value: index
         }
@@ -79,7 +79,7 @@ const table = function(config) {
       },
       children: [{
         name: "option",
-        text: "toevoegen ...",
+        text: I18N.add_a_model + "…",
         value: -1
       }].concat(list.map(create_option)),
       on: {
@@ -152,7 +152,7 @@ const table = function(config) {
 
         head.appendChild( dom.create({
           name: "th",
-          value: quantity.name.replace("_", " "),
+          value: I18N[quantity.name],
           attributes: {
             "data-quantity": quantity.name
           }
@@ -197,7 +197,8 @@ const table = function(config) {
           name: "input",
           attributes: {
             "type": "text",                        
-            "pattern": "(\\+|-)?\\d*((\\.|,)\\d+)?"
+            "pattern": "(\\+|-)?\\d*((\\.|,)\\d+)?",
+            "title": I18N.change + " " + I18N[q]
           },
           on: {
             type: "change",
@@ -259,6 +260,7 @@ const table = function(config) {
         attributes.max = 4 * model.step_size();
         attributes.step = 1;
         attributes.value = model.step_size() * 2;
+        attributes.title = action.tooltip;
 
         return {
           name: "input",
@@ -274,6 +276,7 @@ const table = function(config) {
         if (action.toggled) {
           attributes["data-toggled"] = true;
         }
+        attributes.title = action.tooltip;
         return {
           name: "button",
           attributes: attributes,
@@ -296,6 +299,14 @@ const table = function(config) {
     model.add_action(remove_action());
     const actions_elts = Object.keys(model.actions).filter(show_this_action).map(create_action_elt);
 
+    let translated_name = "";
+    if (model.extensible) {
+      // Extensible models have a special name
+      translated_name = I18N.extensible_highball_glass + " " + model.name.split("_").pop();
+    } else {
+      translated_name = I18N[model.name];
+    }
+
     row = table_body.appendChild(
         dom.create( {
           name: "tr",
@@ -304,12 +315,13 @@ const table = function(config) {
           },
           children: [{
             name: "td",
-            value: model.name.split("_").join(" "),
+            value: translated_name,
             attributes: { "class": "glass-name " + model.name }
           },{
             name: "td",
             attributes: {
-              "class": "color"
+              "class": "color",
+              "title": I18N.click_to_change_color
             },
             children: [{
               name: "span",

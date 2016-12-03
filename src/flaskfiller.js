@@ -16,8 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with FlaskFiller.  If not, see <http://www.gnu.org/licenses/>.
  */
-const glass_model = require("./models/glass");
-const longdrink_model = require("./models/longdrink_glass");
+const highball_model = require("./models/highball_glass");
 const predefined = require("./predefined_glasses");
 const simulation = require("./views/flaskfiller/flaskfiller");
 const table = require("./views/table");
@@ -31,23 +30,23 @@ const flaskfiller = function flaskfiller(config) {
   const flow_rate = config.flow_rate || 50; // ml per sec
   const scale = config.scale || 3.5; // px per mm
   const quantities = {
-    hoogte: {
-      name: "hoogte",
+    height: {
+      name: "height",
       minimum: 0,
       maximum: 10,
       value: 0,
-      label: "hoogte in cm",
+      label: I18N.height_in_cm,
       unit: "cm",
       stepsize: 0.01,
       precision: 2,
       monotone: true
     },
-    tijd: {
-      name: "tijd",
+    time: {
+      name: "time",
       minimum: 0,
       maximum: 100,
       value: 0,
-      label: "tijd in sec",
+      label: I18N.time_in_sec,
       unit: "sec",
       stepsize: 0.01,
       precision: 2,
@@ -58,19 +57,19 @@ const flaskfiller = function flaskfiller(config) {
       minimum: 0,
       maximum: 1000,
       value: 0,
-      label: "volume in ml",
+      label: I18N.volume_in_ml,
       unit: "ml",
       stepsize: 0.01,
       precision: 2,
       monotone: true
     },
-    stijgsnelheid: {
+    speed: {
       minimum: 0,
       maximum: 0,
       value: 0,
       unit: 'cm/sec',
-      name: 'stijgsnelheid',
-      label: 'stijgsnelheid in cm/sec',
+      name: "speed",
+      label: I18N.speed_in_cmsec,
       stepsize: 0.01,
       monotone: false,
       precision: 2
@@ -100,8 +99,8 @@ const flaskfiller = function flaskfiller(config) {
       quantities: quantities,
       scale: scale,
       world_height: WORLD_HEIGHT,
-      horizontal: "tijd",
-      vertical: "hoogte",
+      horizontal: "time",
+      vertical: "height",
       dimensions: {
         width: config.width || 600,
         height: config.height || 400,
@@ -197,8 +196,8 @@ const flaskfiller = function flaskfiller(config) {
           flow_rate: flow_rate
         });
         break;
-      case "longdrink":
-        model = longdrink_model(model_spec.name, {
+      case "highball":
+        model = highball_model(model_spec.name, {
           name: model_spec.name,
           radius: model_spec.radius,
           height: model_spec.height,

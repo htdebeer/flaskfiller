@@ -19,7 +19,7 @@
 const glass_model = require("./models/glass");
 
 const glass_specifications = {
-  klein_longdrinkglas: {
+  small_highball_glass: {
     "bowl": {
       "top": {
         "x": 67,
@@ -44,7 +44,7 @@ const glass_specifications = {
     },
     "scale": 3
   },
-  longdrinkglas: {
+  highball_glass: {
     "bowl": {
       "top": {
         "x": 88,
@@ -69,7 +69,7 @@ const glass_specifications = {
     },
     "scale": 3
   },
-  groter_longdrinkglas: {
+  larger_highball_glass: {
     "bowl": {
       "top": {
         "x": 94,
@@ -94,7 +94,7 @@ const glass_specifications = {
     },
     "scale": 3
   },
-  breed_longdrinkglas: {
+  wide_highball_glass: {
     "bowl": {
       "top": {
         "x": 129,
@@ -119,7 +119,7 @@ const glass_specifications = {
     },
     "scale": 3
   },
-  cocktailglas: {
+  cocktail_glass: {
     "bowl": {
       "top": {
         "x": 169,
@@ -144,7 +144,7 @@ const glass_specifications = {
     },
     "scale": 3
   },
-  klein_cocktailglas: {
+  small_cocktail_glass: {
     "bowl": {
       "top": {
         "x": 141,
@@ -169,7 +169,7 @@ const glass_specifications = {
     },
     "scale": 3
   },
-  wijnglas: {
+  wine_glass: {
     "bowl": {
       "top": {
         "x": 99,
@@ -194,7 +194,7 @@ const glass_specifications = {
     },
     "scale": 3
   },
-  cognacglas: {
+  cognac_glass: {
     "bowl": {
       "top": {
         "x": 69,
@@ -218,7 +218,7 @@ const glass_specifications = {
       "path": "l0,70 l77,9 c5,2.5,7.5,7.5,5,10"},
       "scale": 3
   },
-  bierglas: {
+  beer_glass: {
     "bowl": {
       "top": {
         "x": 108,
@@ -243,7 +243,7 @@ const glass_specifications = {
     },
     "scale": 3
   },
-  vaas: {
+  vase: {
     "bowl": {
       "top": {
         "x": 53,

@@ -317,7 +317,7 @@ const model = function(name, config) {
 
 
   _model.get_minimum = function(quantity) {
-    if (arguments.length===0) {
+    if (arguments.length === 0) {
       // called without any arguments: return all minima
       const minima = {};
       const add_minimum = function(quantity) {
@@ -333,7 +333,7 @@ const model = function(name, config) {
   };
 
   _model.get_maximum = function(quantity) {
-    if (arguments.length===0) {
+    if (arguments.length === 0) {
       // called without any arguments: return all minima
       const maxima = {};
       const add_maximum = function(quantity) {
