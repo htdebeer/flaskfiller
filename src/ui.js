@@ -486,11 +486,9 @@ const getConfiguration = function () {
     id: "table"
   };
 
-  /*
-  config.glassgrafter = {
+  config.designer = {
     id: "designer"
   };
-  */
 
   return config;
 };

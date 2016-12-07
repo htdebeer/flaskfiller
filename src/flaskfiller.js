@@ -133,11 +133,11 @@ const flaskfiller = function flaskfiller(config) {
     views.graph = create_view(config.graph, graph);
   }
 
-  if (config.glassgrafter) {
-    const gg = glassgrafter(config.glassgrafter);
-    const elt = document.getElementById(config.glassgrafter.id);
+  if (config.designer) {
+    const gg = glassgrafter(config.designer);
+    const elt = document.getElementById(config.designer.id);
     if (!elt) {
-      throw new Error("Unable to find element with id=" + config.glassgrafter.id);
+      throw new Error("Unable to find element with id=" + config.designer.id);
     }
     elt.appendChild(gg.fragment);
   }
