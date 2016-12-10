@@ -130,15 +130,14 @@ const glass_grafter = function(config) {
       "background": "white"
     });
 
-  const ACTION_PADDING = 15;
-  const ACTION_WIDTH = 20;
-  const ACTION_HEIGHT = 15;
+  const ACTION_PADDING = 5;
+  const ACTION_WIDTH = 40;
+  const ACTION_HEIGHT = 25;
   const ACTION_SEP = 5;
   const ACTION_AREA = {
-    x: MIRROR_AREA.x + ACTION_PADDING,
+    x: MIRROR_AREA.x,
     y: MIRROR_AREA.y + MIRROR_AREA.height + ACTION_PADDING
   };
-  
 
   let construction_background;
   let mirror_background;
@@ -196,7 +195,7 @@ const glass_grafter = function(config) {
   function draw_action(name, index) {
     const action = canvas.set();
 
-    const x = ACTION_AREA.x + index*(ACTION_SEP * ACTION_WIDTH) + ACTION_SEP;
+    const x = ACTION_AREA.x + index*(ACTION_SEP + ACTION_WIDTH);
     const y = ACTION_AREA.y;
 
     const background = canvas.rect(x, y, ACTION_WIDTH, ACTION_HEIGHT);
@@ -206,7 +205,7 @@ const glass_grafter = function(config) {
     });
     action.push(background);
 
-    const label = canvas.text(x, y, name);
+    const label = canvas.text(x + ACTION_WIDTH/2, y + ACTION_HEIGHT / 2, name);
     action.push(label);
     action.attr({
 

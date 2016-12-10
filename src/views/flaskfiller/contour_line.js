@@ -18,6 +18,31 @@
  */
 const paths = require("../../path");
 
+//  A contour line models the right-hand side of a glass. A contour line is a
+//  list of points. A point has the following properties:
+// 
+//    ∙ x, the x coordinate
+//    ∙ y, the y coordinate
+//    ∙ border, border ∈ {none, foot, stem, bowl, edge}
+//    ∙ segment, the line segment starting from this point to the next, if
+//               there is a next point. A segment has the following
+//               properties:
+//      ∙ type, type ∈ {straight, curve}
+//      ∙ c1, control point for this point, only when type = curve
+//        ∙ x, the x coordinate of the control point
+//        ∙ y, the y coordinate of the control point
+//      ∙ c2, control point for the next point, only when type = curve
+//        ∙ x, the x coordinate of the control point
+//        ∙ y, the y coordinate of the control point
+// 
+//  For a contour line the followin holds:
+// 
+//    min.y ≤ edge.y ≤ bowl.y ≤ stem.y ≤ foot.y = max.y
+//  ∧
+//    (∀p: 0 ≤ p < |points| - 1: points[p].y < points[p+1].y)
+//  ∧
+//    (∀p: 0 ≤ p < |points|: mid.x ≤ points[p].x ≤ max.x)
+
 const contour_line = function(canvas, shape_, BOUNDARIES) {
 
   const _contour_line = {};
@@ -42,7 +67,6 @@ const contour_line = function(canvas, shape_, BOUNDARIES) {
     shape.base.bottom.x -= MID_X;
     return shape;
   }
-
   
   function draw() {
     const shape = normalize_shape(_contour_line.shape());
@@ -56,9 +80,7 @@ const contour_line = function(canvas, shape_, BOUNDARIES) {
     base_path.attr({
       path: "M" + x + "," + y + paths.complete_path(shape.base) + "z"
     });
-
   }
-
 
   function remove_point(point) {
     if (point.type !== "part") {
@@ -84,10 +106,10 @@ const contour_line = function(canvas, shape_, BOUNDARIES) {
     point.segment.command = "l";
     draw();
   }
-
   
   function action_on_point(point) {
     return function() {
+      console.log("Action on point: ", point, _contour_line.curent_action);
       switch (_contour_line.current_action) {
         case "remove":
           remove_point(point);
@@ -203,17 +225,22 @@ const contour_line = function(canvas, shape_, BOUNDARIES) {
     point.type = type;
     point.x = function() {return this.attr("cx");};
     point.y = function() {return this.attr("cy");};
+    point.attr({
+      cursor: "move"
+    });
 
     point.control_points = canvas.set();
-    point.control_points.cp1 = canvas.circle(0,0, 3);
+    point.control_points.cp1 = canvas.circle(0, 0, 3);
     point.control_points.cp1.attr({
       fill: "yellow",
-      stroke: "blue"
+      stroke: "blue",
+      cursor: "move"
     });
-    point.control_points.cp2 = canvas.circle(0,0, 3);
+    point.control_points.cp2 = canvas.circle(0, 0, 3);
     point.control_points.cp2.attr({
       fill: "yellow",
-      stroke: "blue"
+      stroke: "blue",
+      cursor: "move"
     });
     point.control_points.push(point.control_points.cp1);
     point.control_points.push(point.control_points.cp2);
@@ -239,20 +266,18 @@ const contour_line = function(canvas, shape_, BOUNDARIES) {
     return point;
   }
 
-
-
-
   function show_control_points() {
-    points.forEach(function(point) {
+    points.forEach(function(point, index) {
+      const previousPoint = points[index > 0 ? index - 1 : 0];
       console.log("showing control points for: ", point);
       if (point.segment.command === "c") {
         point.control_points.cp1.attr({
-          cx: point.segment.cp1.x,
-          cy: point.segment.cp1.y
+          cx: previousPoint.x() + point.segment.cp1.x,
+          cy: previousPoint.y() + point.segment.cp1.y
         });
         point.control_points.cp2.attr({
-          cx: point.segment.cp2.x,
-          cy: point.segment.cp2.y
+          cx: point.x() + point.segment.cp2.x,
+          cy: point.y() - point.segment.cp2.y
         });
         point.control_points.show();
       }
@@ -273,6 +298,8 @@ const contour_line = function(canvas, shape_, BOUNDARIES) {
     const specification = {
       command: command
     };
+
+    console.log("Parse segement: ", segment, command, elts);
 
     switch (command) {
       case "v":
