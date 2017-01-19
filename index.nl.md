@@ -12,6 +12,8 @@ language: nl
 
 # Inleiding
 
+*You will find the international English version, FlaskFiller, [here](https://heerdebeer.org/Software/flaskfiller).*
+
 FlessenVuller is een leergereedschap om momentane snelheid te onderzoeken op
 de basisschool.  Het is gemaakt als onderdeel van een onderzoek naar [het
 onderwijzen van momentane snelheid in groep 7](https://heerdebeer.org/DR/).
